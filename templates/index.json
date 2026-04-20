@@ -9,6 +9,50 @@
  */
 {
   "sections": {
+    "video_image_carousel_Gk6yeb": {
+      "type": "video-image-carousel",
+      "blocks": {
+        "image_hbUxmf": {
+          "type": "image",
+          "settings": {
+            "layout": "image_first",
+            "heading": "Elevate Your Style",
+            "subheading": "<p>Discover our curated collection of premium essentials.</p>",
+            "button_label": "Shop Now",
+            "link": "",
+            "button_style_secondary": false,
+            "button_label_2": "Explore more",
+            "link_2": "",
+            "button_style_secondary_2": true,
+            "color_scheme": ""
+          }
+        },
+        "video_fE4Mjm": {
+          "type": "video",
+          "settings": {
+            "layout": "image_first",
+            "heading": "Motion in Style",
+            "subheading": "<p>Experience our products in action.</p>",
+            "button_label": "Watch & Shop",
+            "link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "link_2": "",
+            "button_style_secondary_2": true,
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_hbUxmf",
+        "video_fE4Mjm"
+      ],
+      "name": "Modern Split Carousel",
+      "settings": {
+        "desktop_height": 600,
+        "mobile_height": 600
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -91,6 +135,63 @@
       "block_order": [
         "ai_gen_block_4d8461a_LNiEjf"
       ],
+      "settings": {}
+    },
+    "hero_banner_n3fETc": {
+      "type": "hero-banner",
+      "name": "Hero Banner",
+      "settings": {
+        "heading": "🔥 Big Sale Today 🔥",
+        "subtext": "Best products here",
+        "background_color": "#f4f4f4",
+        "text_color": "#121212"
+      }
+    },
+    "blocks_68RzRx": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_516e53a_MrFkqm": {
+          "type": "ai_gen_block_516e53a",
+          "settings": {
+            "overlay_opacity": 0.5,
+            "heading": "Welcome to our store",
+            "heading_color": "#ffffff",
+            "heading_font_size": 48,
+            "heading_bold": true,
+            "heading_italic": false,
+            "description": "Discover our latest collection",
+            "description_color": "#ffffff",
+            "description_font_size": 18,
+            "description_bold": false,
+            "description_italic": false,
+            "button_primary_label": "Shop now",
+            "button_primary_link": "",
+            "button_primary_bg": "#121212",
+            "button_primary_text": "#ffffff",
+            "button_primary_hover_bg": "#000000",
+            "button_primary_hover_text": "#ffffff",
+            "button_secondary_label": "Learn more",
+            "button_secondary_link": "",
+            "button_secondary_bg": "#ffffff",
+            "button_secondary_text": "#121212",
+            "button_secondary_hover_bg": "#f3f3f3",
+            "button_secondary_hover_text": "#121212",
+            "button_font_size": 16,
+            "button_border_radius": 0,
+            "padding_top": 80,
+            "padding_bottom": 80,
+            "padding_top_mobile": 60,
+            "padding_bottom_mobile": 60,
+            "hide_on_desktop": false,
+            "hide_on_mobile": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_516e53a_MrFkqm"
+      ],
+      "name": "Hero banner",
       "settings": {}
     },
     "featured_collection": {
@@ -235,14 +336,14 @@
             "button_primary_label": "Shop now",
             "button_primary_link": "",
             "button_primary_bg": "#121212",
-            "button_primary_text": "#FFFFFF",
+            "button_primary_text": "#ffffff",
             "button_primary_hover_bg": "#000000",
-            "button_primary_hover_text": "#FFFFFF",
+            "button_primary_hover_text": "#ffffff",
             "button_secondary_label": "Learn more",
             "button_secondary_link": "",
-            "button_secondary_bg": "#FFFFFF",
+            "button_secondary_bg": "#ffffff",
             "button_secondary_text": "#121212",
-            "button_secondary_hover_bg": "#F3F3F3",
+            "button_secondary_hover_bg": "#f3f3f3",
             "button_secondary_hover_text": "#121212",
             "button_font_size": 16,
             "button_border_radius": 0,
@@ -263,8 +364,11 @@
     }
   },
   "order": [
+    "video_image_carousel_Gk6yeb",
     "image_banner",
     "17705624606cb6c586",
+    "hero_banner_n3fETc",
+    "blocks_68RzRx",
     "featured_collection",
     "177056274280a21166",
     "177080422728c07762",
