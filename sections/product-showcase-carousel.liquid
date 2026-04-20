@@ -15,120 +15,32 @@
     }
   }
 
-  /* Top Banner Styles */
-  .product-showcase__banner {
-    position: relative;
-    margin-bottom: 4rem;
-    border-radius: 12px;
-    overflow: hidden;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
+  /* Dynamic Typography and Colors */
+  .product-showcase__banner-content h2 {
+    font-size: {{ section.settings.banner_heading_size_mobile }}px;
+    color: {{ section.settings.banner_text_color }};
+  }
+  .product-showcase__banner-content p {
+    font-size: {{ section.settings.banner_subheading_size_mobile }}px;
+    color: {{ section.settings.banner_text_color }};
   }
 
-  .product-showcase__banner-media {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-
-  .product-showcase__banner-media video,
-  .product-showcase__banner-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .product-showcase__banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.3);
-    z-index: 0;
-  }
-
-  .product-showcase__banner-content {
-    position: relative;
-    z-index: 1;
-    max-width: 600px;
-    padding: 0 2rem;
-  }
-
-  /* Slider Styles */
-  .product-showcase__slider-wrapper {
-    position: relative;
-  }
-
-  .product-showcase__slider {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    column-gap: 1.5rem;
-    padding-bottom: 2rem;
-    scrollbar-width: none;
-  }
-
-  .product-showcase__slider::-webkit-scrollbar {
-    display: none;
-  }
-
-  .product-showcase__item {
-    flex: 0 0 calc(20% - 1.2rem); /* 5 columns desktop */
-    scroll-snap-align: start;
-  }
-
-  @media screen and (max-width: 749px) {
-    .product-showcase__item {
-      flex: 0 0 40%; /* 2.5 columns mobile */
+  @media screen and (min-width: 750px) {
+    .product-showcase__banner-content h2 {
+      font-size: {{ section.settings.banner_heading_size }}px;
     }
-    .product-showcase__banner {
-      height: 300px;
+    .product-showcase__banner-content p {
+      font-size: {{ section.settings.banner_subheading_size }}px;
     }
-  }
-
-  .product-showcase__media-card {
-    position: relative;
-    width: 100%;
-    padding-bottom: 125%; /* 4:5 aspect ratio */
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-    background: #f3f3f3;
-  }
-
-  .product-showcase__media-card video,
-  .product-showcase__media-card img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .product-showcase__info {
-    text-decoration: none;
-    color: inherit;
   }
 
   .product-showcase__title {
-    font-size: 1.4rem;
-    margin: 0.5rem 0;
-    font-weight: 500;
+    font-size: {{ section.settings.product_title_size }}px !important;
+    color: {{ section.settings.product_text_color }} !important;
   }
-
   .product-showcase__price {
-    font-size: 1.2rem;
-    color: rgba(var(--color-foreground), 0.7);
+    font-size: {{ section.settings.product_price_size }}px !important;
+    color: {{ section.settings.product_price_color }} !important;
   }
 {%- endstyle -%}
 
@@ -145,7 +57,7 @@
           {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
         {%- endif -%}
       </div>
-      <div class="product-showcase__banner-overlay"></div>
+      <div class="product-showcase__banner-overlay" style="background: rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }});"></div>
       <div class="product-showcase__banner-content">
         <h2 class="h1">{{ section.settings.banner_heading }}</h2>
         <p>{{ section.settings.banner_subheading }}</p>
@@ -194,7 +106,7 @@
   "settings": [
     {
       "type": "header",
-      "content": "Explanation Banner"
+      "content": "Banner Styling"
     },
     {
       "type": "checkbox",
@@ -213,16 +125,108 @@
       "label": "Banner Video"
     },
     {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Overlay Opacity",
+      "default": 30
+    },
+    {
       "type": "inline_richtext",
       "id": "banner_heading",
       "default": "The Collection Story",
       "label": "Banner Heading"
     },
     {
+      "type": "range",
+      "id": "banner_heading_size",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "banner_heading_size_mobile",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Mobile)",
+      "default": 28
+    },
+    {
       "type": "inline_richtext",
       "id": "banner_subheading",
       "default": "Explain why your products are the best here.",
       "label": "Banner Subheading"
+    },
+    {
+      "type": "range",
+      "id": "banner_subheading_size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Font Size (Desktop)",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "banner_subheading_size_mobile",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Font Size (Mobile)",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "banner_text_color",
+      "default": "#FFFFFF",
+      "label": "Banner Text Color"
+    },
+    {
+      "type": "header",
+      "content": "Product Carousel Styling"
+    },
+    {
+      "type": "color",
+      "id": "product_text_color",
+      "default": "#121212",
+      "label": "Product Title Color"
+    },
+    {
+      "type": "range",
+      "id": "product_title_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Product Title Font Size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "product_price_color",
+      "default": "#616161",
+      "label": "Product Price Color"
+    },
+    {
+      "type": "range",
+      "id": "product_price_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Product Price Font Size",
+      "default": 12
     },
     {
       "type": "header",
