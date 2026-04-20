@@ -1,0 +1,64 @@
+{%- style -%}
+  .hero-banner-{{ section.id }} {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  .hero-banner-{{ section.id }} h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: inherit;
+  }
+  .hero-banner-{{ section.id }} p {
+    font-size: 1.25rem;
+    color: inherit;
+    opacity: 0.9;
+  }
+{%- endstyle -%}
+
+<div class="hero-banner-{{ section.id }} hero">
+  <h1>{{ section.settings.heading }}</h1>
+  <p>{{ section.settings.subtext }}</p>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "🔥 Big Sale Today 🔥",
+      "label": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtext",
+      "default": "Best products here",
+      "label": "Subtext"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#f4f4f4",
+      "label": "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#121212",
+      "label": "Text Color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}
