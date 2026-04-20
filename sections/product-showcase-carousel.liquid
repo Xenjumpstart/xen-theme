@@ -1,0 +1,292 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* Top Banner Styles */
+  .product-showcase__banner {
+    position: relative;
+    margin-bottom: 4rem;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+  }
+
+  .product-showcase__banner-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .product-showcase__banner-media video,
+  .product-showcase__banner-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-showcase__banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 0;
+  }
+
+  .product-showcase__banner-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    padding: 0 2rem;
+  }
+
+  /* Slider Styles */
+  .product-showcase__slider-wrapper {
+    position: relative;
+  }
+
+  .product-showcase__slider {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    column-gap: 1.5rem;
+    padding-bottom: 2rem;
+    scrollbar-width: none;
+  }
+
+  .product-showcase__slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  .product-showcase__item {
+    flex: 0 0 calc(20% - 1.2rem); /* 5 columns desktop */
+    scroll-snap-align: start;
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-showcase__item {
+      flex: 0 0 40%; /* 2.5 columns mobile */
+    }
+    .product-showcase__banner {
+      height: 300px;
+    }
+  }
+
+  .product-showcase__media-card {
+    position: relative;
+    width: 100%;
+    padding-bottom: 125%; /* 4:5 aspect ratio */
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background: #f3f3f3;
+  }
+
+  .product-showcase__media-card video,
+  .product-showcase__media-card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-showcase__info {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .product-showcase__title {
+    font-size: 1.4rem;
+    margin: 0.5rem 0;
+    font-weight: 500;
+  }
+
+  .product-showcase__price {
+    font-size: 1.2rem;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+{%- endstyle -%}
+
+<div class="product-showcase section-{{ section.id }}-padding page-width">
+  
+  {%- if section.settings.show_banner -%}
+    <div class="product-showcase__banner">
+      <div class="product-showcase__banner-media">
+        {%- if section.settings.banner_video != blank -%}
+          {{ section.settings.banner_video | video_tag: autoplay: true, loop: true, muted: true, controls: false }}
+        {%- elsif section.settings.banner_image != blank -%}
+          <img src="{{ section.settings.banner_image | image_url: width: 1500 }}" alt="{{ section.settings.banner_image.alt }}" loading="lazy">
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+      <div class="product-showcase__banner-overlay"></div>
+      <div class="product-showcase__banner-content">
+        <h2 class="h1">{{ section.settings.banner_heading }}</h2>
+        <p>{{ section.settings.banner_subheading }}</p>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <slider-component class="product-showcase__slider-wrapper">
+    <ul id="Slider-{{ section.id }}" class="product-showcase__slider list-unstyled slider--mobile" role="list">
+      {%- for block in section.blocks -%}
+        <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="product-showcase__item slider__slide" {{ block.shopify_attributes }}>
+          {%- assign product = block.settings.product -%}
+          <a href="{{ product.url | default: '#' }}" class="product-showcase__info">
+            <div class="product-showcase__media-card">
+              {%- if block.settings.video != blank -%}
+                {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false }}
+              {%- elsif block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.image.alt }}" loading="lazy">
+              {%- elsif product.featured_media != blank -%}
+                 <img src="{{ product.featured_media | image_url: width: 600 }}" alt="{{ product.title }}" loading="lazy">
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <h3 class="product-showcase__title">{{ product.title | default: "Example Product" }}</h3>
+            <div class="product-showcase__price">
+              {%- if product != blank -%}
+                {{ product.price | money }}
+              {%- else -%}
+                $19.99
+              {%- endif -%}
+            </div>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </slider-component>
+
+</div>
+
+{% schema %}
+{
+  "name": "Product Showcase Carousel",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Explanation Banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_banner",
+      "default": true,
+      "label": "Show Top Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "video",
+      "id": "banner_video",
+      "label": "Banner Video"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "banner_heading",
+      "default": "The Collection Story",
+      "label": "Banner Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "banner_subheading",
+      "default": "Explain why your products are the best here.",
+      "label": "Banner Subheading"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_item",
+      "name": "Product Item",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "header",
+          "content": "Override Media (Optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Image"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Custom Video"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Showcase Carousel",
+      "blocks": [
+        { "type": "product_item" },
+        { "type": "product_item" },
+        { "type": "product_item" },
+        { "type": "product_item" },
+        { "type": "product_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
