@@ -63,21 +63,42 @@
   }
 
   @media screen and (max-width: 749px) {
+    .modern-carousel-{{ section.id }} {
+      --carousel-height: {{ section.settings.mobile_height }}px;
+    }
     .modern-carousel__slide {
       flex-direction: column !important;
-      height: auto;
+      position: relative;
+      height: var(--carousel-height);
     }
     .modern-carousel__media {
-      flex: 0 0 300px;
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
+      height: 100%;
+      z-index: 1;
     }
     .modern-carousel__content {
-      flex: 1 0 auto;
-      padding: 3rem 2rem;
-      width: 100%;
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 40%, transparent 100%) !important;
+      height: 100%;
+      justify-content: flex-end !important;
+      padding: 3rem 2rem !important;
+      width: 100% !important;
+      color: #FFFFFF !important;
     }
     .modern-carousel__heading {
-      font-size: 2.5rem;
+      font-size: 2.8rem !important;
+      margin-bottom: 1rem !important;
+    }
+    .modern-carousel__subheading {
+      font-size: 1.1rem !important;
+      margin-bottom: 2rem !important;
+    }
+    .modern-carousel__content .button {
+      width: 100%;
     }
   }
 {%- endstyle -%}
