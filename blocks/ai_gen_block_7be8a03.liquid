@@ -1,0 +1,1187 @@
+{% doc %}
+  @prompt
+    Create a hero banner with 4-column feature grid section:
+    
+    BANNER SECTION:
+    - Full-width background with image upload option
+    - Orange gradient overlay (customizable color and opacity)
+    - Large white H1 heading positioned top-left with bold weight
+    - White paragraph text below heading (customizable font size)
+    - Right-side product image placement
+    - Padding controls for top/bottom spacing
+    
+    4-COLUMN GRID SECTION:
+    - Semi-transparent dark green/teal overlay background (adjustable opacity 0-100%)
+    - Background color picker for overlay
+    - 4 columns with circular images, each with:
+      * Circular image with colored border ring (customizable border color per column)
+      * Border width control (2-10px)
+      * Separate image upload for DESKTOP and MOBILE versions
+      * White bold H3 heading below image
+      * White body text below heading
+      * Individual text alignment options
+    
+    RESPONSIVE BEHAVIOR:
+    - Desktop: 4-5 columns per row, wraps to new row if more than 5
+    - Tablet: 2-3 columns per row
+    - Mobile: EXACTLY 2 columns per row, stacks vertically
+    
+    CUSTOMIZATION SETTINGS - SEPARATE DESKTOP & MOBILE CONTROLS:
+    - Banner background image upload (desktop and mobile separate)
+    - Banner overlay color and opacity
+    - Banner heading and body text (rich text editor)
+    - Banner text color picker
+    - Column background overlay color and opacity
+    - Individual column image uploads (DESKTOP IMAGE and MOBILE IMAGE separate uploads for each column)
+    - Individual column border colors (color picker for each)
+    - Border width slider
+    - DESKTOP heading font size (16-48px)
+    - MOBILE heading font size (14-32px)
+    - DESKTOP body text font size (12-24px)
+    - MOBILE body text font size (10-18px)
+    - DESKTOP text color pickers (heading and body separate)
+    - MOBILE text color pickers (heading and body separate)
+    - Padding controls (top, bottom, left, right)
+    - CUSTOM CSS TEXTAREA with syntax highlighting
+    - Border radius for images (0-100% for circular effect)
+    
+    DESIGN SPECIFICATIONS:
+    - Default circular images (border-radius: 50%)
+    - Colored border rings around each image
+    - White text on dark overlay for readability
+    - Smooth hover effects on columns (optional scale/lift animation)
+    - Consistent spacing between columns (gap: 20-40px adjustable)
+    - Center-aligned text within each column
+    - Mobile-optimized touch targets
+    - Mobile displays exactly 2 columns per row with proper wrapping, can we have options to add more column max 8 
+    can also have options to set number of column per row on desktop?, can we have padding spacing around the green transparent background, can we set the feature grid section overlay on the image? 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-hero-feature-grid-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-hero-banner-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding: {{ block.settings.banner_padding_top }}px {{ block.settings.banner_padding_left }}px {{ block.settings.banner_padding_bottom }}px {{ block.settings.banner_padding_right }}px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+
+  .ai-hero-banner-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: {{ block.settings.banner_overlay_color }};
+    opacity: {{ block.settings.banner_overlay_opacity | divided_by: 100.0 }};
+    pointer-events: none;
+  }
+
+  .ai-hero-banner-content-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .ai-hero-banner-text-{{ ai_gen_id }} {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .ai-hero-banner-heading-{{ ai_gen_id }} {
+    margin: 0 0 20px;
+    font-weight: 700;
+    color: {{ block.settings.banner_text_color }};
+  }
+
+  .ai-hero-banner-heading-{{ ai_gen_id }} h1 {
+    margin: 0;
+    font-size: {{ block.settings.desktop_heading_size }}px;
+    line-height: 1.2;
+  }
+
+  .ai-hero-banner-body-{{ ai_gen_id }} {
+    color: {{ block.settings.banner_text_color }};
+    font-size: {{ block.settings.desktop_body_size }}px;
+    line-height: 1.6;
+  }
+
+  .ai-hero-banner-image-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    max-width: 500px;
+  }
+
+  .ai-hero-banner-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ai-feature-grid-outer-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .ai-feature-grid-outer-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: {{ block.settings.grid_overlay_color }};
+    opacity: {{ block.settings.grid_overlay_opacity | divided_by: 100.0 }};
+    pointer-events: none;
+  }
+
+  .ai-feature-grid-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 1;
+    padding: {{ block.settings.grid_padding_top }}px {{ block.settings.grid_padding_left }}px {{ block.settings.grid_padding_bottom }}px {{ block.settings.grid_padding_right }}px;
+  }
+
+  .ai-feature-grid-container-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.desktop_columns_per_row }}, 1fr);
+    gap: {{ block.settings.column_gap }}px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .ai-feature-column-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-feature-column-{{ ai_gen_id }}:hover {
+    transform: translateY(-5px);
+  }
+
+  .ai-feature-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .ai-feature-image-{{ ai_gen_id }} {
+    width: 150px;
+    height: 150px;
+    border-radius: {{ block.settings.image_border_radius }}%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-feature-heading-{{ ai_gen_id }} {
+    margin: 0 0 10px;
+    font-weight: 700;
+    color: {{ block.settings.desktop_heading_color }};
+    font-size: {{ block.settings.desktop_grid_heading_size }}px;
+  }
+
+  .ai-feature-heading-{{ ai_gen_id }} h3 {
+    margin: 0;
+    font-size: inherit;
+  }
+
+  .ai-feature-text-{{ ai_gen_id }} {
+    color: {{ block.settings.desktop_body_color }};
+    font-size: {{ block.settings.desktop_grid_body_size }}px;
+    line-height: 1.6;
+  }
+
+  .ai-custom-css-{{ ai_gen_id }} {
+    {{ block.settings.custom_css }}
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-hero-banner-content-{{ ai_gen_id }} {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .ai-hero-banner-image-{{ ai_gen_id }} {
+      max-width: 100%;
+    }
+
+    .ai-feature-grid-container-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-hero-banner-heading-{{ ai_gen_id }} h1 {
+      font-size: {{ block.settings.mobile_heading_size }}px;
+    }
+
+    .ai-hero-banner-body-{{ ai_gen_id }} {
+      font-size: {{ block.settings.mobile_body_size }}px;
+    }
+
+    .ai-feature-heading-{{ ai_gen_id }} {
+      color: {{ block.settings.mobile_heading_color }};
+      font-size: {{ block.settings.mobile_grid_heading_size }}px;
+    }
+
+    .ai-feature-text-{{ ai_gen_id }} {
+      color: {{ block.settings.mobile_body_color }};
+      font-size: {{ block.settings.mobile_grid_body_size }}px;
+    }
+
+    .ai-feature-grid-container-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+{% endstyle %}
+
+<hero-feature-grid-{{ ai_gen_id }} class="ai-hero-feature-grid-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div 
+    class="ai-hero-banner-{{ ai_gen_id }}"
+    style="background-image: url('{% if block.settings.banner_bg_desktop %}{{ block.settings.banner_bg_desktop | image_url: width: 2000 }}{% endif %}');"
+  >
+    <div class="ai-hero-banner-content-{{ ai_gen_id }}">
+      <div class="ai-hero-banner-text-{{ ai_gen_id }}">
+        {% if block.settings.banner_heading != blank %}
+          <div class="ai-hero-banner-heading-{{ ai_gen_id }}">
+            {{ block.settings.banner_heading }}
+          </div>
+        {% endif %}
+        {% if block.settings.banner_body != blank %}
+          <div class="ai-hero-banner-body-{{ ai_gen_id }}">
+            {{ block.settings.banner_body }}
+          </div>
+        {% endif %}
+      </div>
+      {% if block.settings.banner_product_image %}
+        <div class="ai-hero-banner-image-{{ ai_gen_id }}">
+          <img 
+            src="{{ block.settings.banner_product_image | image_url: width: 1000 }}"
+            alt="{{ block.settings.banner_product_image.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.banner_product_image.width }}"
+            height="{{ block.settings.banner_product_image.height }}"
+          >
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div 
+    class="ai-feature-grid-outer-{{ ai_gen_id }}"
+    style="background-image: url('{% if block.settings.grid_bg_desktop %}{{ block.settings.grid_bg_desktop | image_url: width: 2000 }}{% endif %}');"
+  >
+    <div class="ai-feature-grid-{{ ai_gen_id }}">
+      <div class="ai-feature-grid-container-{{ ai_gen_id }}">
+        {% for i in (1..8) %}
+          {% liquid
+            assign column_enabled_key = 'column_' | append: i | append: '_enabled'
+            assign desktop_image_key = 'column_' | append: i | append: '_desktop_image'
+            assign mobile_image_key = 'column_' | append: i | append: '_mobile_image'
+            assign heading_key = 'column_' | append: i | append: '_heading'
+            assign text_key = 'column_' | append: i | append: '_text'
+            assign border_color_key = 'column_' | append: i | append: '_border_color'
+            assign alignment_key = 'column_' | append: i | append: '_alignment'
+
+            assign column_enabled = block.settings[column_enabled_key]
+            assign desktop_image = block.settings[desktop_image_key]
+            assign mobile_image = block.settings[mobile_image_key]
+            assign heading = block.settings[heading_key]
+            assign text = block.settings[text_key]
+            assign border_color = block.settings[border_color_key]
+            assign alignment = block.settings[alignment_key]
+          %}
+
+          {% if column_enabled %}
+            <div class="ai-feature-column-{{ ai_gen_id }}" style="text-align: {{ alignment }};">
+              <div class="ai-feature-image-wrapper-{{ ai_gen_id }}">
+                <picture>
+                  {% if mobile_image %}
+                    <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 300 }}">
+                  {% endif %}
+                  {% if desktop_image %}
+                    <img 
+                      src="{{ desktop_image | image_url: width: 300 }}"
+                      alt="{{ desktop_image.alt | escape }}"
+                      loading="lazy"
+                      class="ai-feature-image-{{ ai_gen_id }}"
+                      style="border: {{ block.settings.border_width }}px solid {{ border_color }};"
+                    >
+                  {% else %}
+                    <div class="ai-feature-image-placeholder-{{ ai_gen_id }}">
+                      {{ 'image' | placeholder_svg_tag }}
+                    </div>
+                  {% endif %}
+                </picture>
+              </div>
+              {% if heading != blank %}
+                <div class="ai-feature-heading-{{ ai_gen_id }}">
+                  {{ heading }}
+                </div>
+              {% endif %}
+              {% if text != blank %}
+                <div class="ai-feature-text-{{ ai_gen_id }}">
+                  {{ text }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-custom-css-{{ ai_gen_id }}"></div>
+</hero-feature-grid-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class HeroFeatureGrid{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.updateBackgroundImages();
+        window.addEventListener('resize', () => this.updateBackgroundImages());
+      }
+
+      updateBackgroundImages() {
+        const banner = this.querySelector('.ai-hero-banner-{{ ai_gen_id }}');
+        const gridOuter = this.querySelector('.ai-feature-grid-outer-{{ ai_gen_id }}');
+        const isMobile = window.innerWidth <= 749;
+        
+        const desktopBannerBg = '{% if block.settings.banner_bg_desktop %}{{ block.settings.banner_bg_desktop | image_url: width: 2000 }}{% endif %}';
+        const mobileBannerBg = '{% if block.settings.banner_bg_mobile %}{{ block.settings.banner_bg_mobile | image_url: width: 1000 }}{% endif %}';
+        
+        const desktopGridBg = '{% if block.settings.grid_bg_desktop %}{{ block.settings.grid_bg_desktop | image_url: width: 2000 }}{% endif %}';
+        const mobileGridBg = '{% if block.settings.grid_bg_mobile %}{{ block.settings.grid_bg_mobile | image_url: width: 1000 }}{% endif %}';
+        
+        if (isMobile && mobileBannerBg) {
+          banner.style.backgroundImage = `url('${mobileBannerBg}')`;
+        } else if (desktopBannerBg) {
+          banner.style.backgroundImage = `url('${desktopBannerBg}')`;
+        }
+
+        if (isMobile && mobileGridBg) {
+          gridOuter.style.backgroundImage = `url('${mobileGridBg}')`;
+        } else if (desktopGridBg) {
+          gridOuter.style.backgroundImage = `url('${desktopGridBg}')`;
+        }
+      }
+    }
+
+    customElements.define('hero-feature-grid-{{ ai_gen_id }}', HeroFeatureGrid{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hero banner with features",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner section"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_bg_desktop",
+      "label": "Desktop background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_bg_mobile",
+      "label": "Mobile background image"
+    },
+    {
+      "type": "color",
+      "id": "banner_overlay_color",
+      "label": "Overlay color",
+      "default": "#FF6B35"
+    },
+    {
+      "type": "range",
+      "id": "banner_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 60
+    },
+    {
+      "type": "richtext",
+      "id": "banner_heading",
+      "label": "Heading",
+      "default": "<h1>Welcome to our store</h1>"
+    },
+    {
+      "type": "richtext",
+      "id": "banner_body",
+      "label": "Body text",
+      "default": "<p>Discover our amazing products and exclusive offers</p>"
+    },
+    {
+      "type": "color",
+      "id": "banner_text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_product_image",
+      "label": "Product image"
+    },
+    {
+      "type": "range",
+      "id": "desktop_heading_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop heading size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile heading size",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "desktop_body_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop body size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_body_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile body size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "banner_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Banner top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "banner_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Banner bottom padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "banner_padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Banner left padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "banner_padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Banner right padding",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Feature grid section"
+    },
+    {
+      "type": "image_picker",
+      "id": "grid_bg_desktop",
+      "label": "Desktop background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "grid_bg_mobile",
+      "label": "Mobile background image"
+    },
+    {
+      "type": "range",
+      "id": "desktop_columns_per_row",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "label": "Desktop columns per row",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "grid_overlay_color",
+      "label": "Grid overlay color",
+      "default": "#1A5F5F"
+    },
+    {
+      "type": "range",
+      "id": "grid_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Grid overlay opacity",
+      "default": 85
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 20,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Column gap",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Image border width",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Image border radius",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "desktop_grid_heading_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop heading size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_grid_heading_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile heading size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "desktop_grid_body_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop body size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "mobile_grid_body_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile body size",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "desktop_heading_color",
+      "label": "Desktop heading color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "mobile_heading_color",
+      "label": "Mobile heading color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "desktop_body_color",
+      "label": "Desktop body color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "mobile_body_color",
+      "label": "Mobile body color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "grid_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Grid top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "grid_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Grid bottom padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "grid_padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Grid left padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "grid_padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Grid right padding",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Column 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "column_1_enabled",
+      "label": "Enable column 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "column_1_desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_1_mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "color",
+      "id": "column_1_border_color",
+      "label": "Border color",
+      "default": "#FF6B35"
+    },
+    {
+      "type": "richtext",
+      "id": "column_1_heading",
+      "label": "Heading",
+      "default": "<h3>Feature 1</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "column_1_text",
+      "label": "Text",
+      "default": "<p>Description of feature 1</p>"
+    },
+    {
+      "type": "select",
+      "id": "column_1_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Column 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "column_2_enabled",
+      "label": "Enable column 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "column_2_desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_2_mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "color",
+      "id": "column_2_border_color",
+      "label": "Border color",
+      "default": "#FFD93D"
+    },
+    {
+      "type": "richtext",
+      "id": "column_2_heading",
+      "label": "Heading",
+      "default": "<h3>Feature 2</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "column_2_text",
+      "label": "Text",
+      "default": "<p>Description of feature 2</p>"
+    },
+    {
+      "type": "select",
+      "id": "column_2_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Column 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "column_3_enabled",
+      "label": "Enable column 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "column_3_desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_3_mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "color",
+      "id": "column_3_border_color",
+      "label": "Border color",
+      "default": "#6BCB77"
+    },
+    {
+      "type": "richtext",
+      "id": "column_3_heading",
+      "label": "Heading",
+      "default": "<h3>Feature 3</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "column_3_text",
+      "label": "Text",
+      "default": "<p>Description of feature 3</p>"
+    },
+    {
+      "type": "select",
+      "id": "column_3_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Column 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "column_4_enabled",
+      "label": "Enable column 4",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "column_4_desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_4_mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "color",
+      "id": "column_4_border_color",
+      "label": "Border color",
+      "default": "#4D96FF"
+    },
+    {
+      "type": "richtext",
+      "id": "column_4_heading",
+      "label": "Heading",
+      "default": "<h3>Feature 4</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "column_4_text",
+      "label": "Text",
+      "default": "<p>Description of feature 4</p>"
+    },
+    {
+      "type": "select",
+      "id": "column_4_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Column 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "column_5_enabled",
+      "label": "Enable column 5",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "column_5_desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_5_mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "color",
+      "id": "column_5_border_color",
+      "label": "Border color",
+      "default": "#9B59B6"
+    },
+    {
+      "type": "richtext",
+      "id": "column_5_heading",
+      "label": "Heading",
+      "default": "<h3>Feature 5</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "column_5_text",
+      "label": "Text",
+      "default": "<p>Description of feature 5</p>"
+    },
+    {
+      "type": "select",
+      "id": "column_5_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Column 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "column_6_enabled",
+      "label": "Enable column 6",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "column_6_desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_6_mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "color",
+      "id": "column_6_border_color",
+      "label": "Border color",
+      "default": "#E74C3C"
+    },
+    {
+      "type": "richtext",
+      "id": "column_6_heading",
+      "label": "Heading",
+      "default": "<h3>Feature 6</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "column_6_text",
+      "label": "Text",
+      "default": "<p>Description of feature 6</p>"
+    },
+    {
+      "type": "select",
+      "id": "column_6_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Column 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "column_7_enabled",
+      "label": "Enable column 7",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "column_7_desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_7_mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "color",
+      "id": "column_7_border_color",
+      "label": "Border color",
+      "default": "#F39C12"
+    },
+    {
+      "type": "richtext",
+      "id": "column_7_heading",
+      "label": "Heading",
+      "default": "<h3>Feature 7</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "column_7_text",
+      "label": "Text",
+      "default": "<p>Description of feature 7</p>"
+    },
+    {
+      "type": "select",
+      "id": "column_7_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Column 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "column_8_enabled",
+      "label": "Enable column 8",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "column_8_desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_8_mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "color",
+      "id": "column_8_border_color",
+      "label": "Border color",
+      "default": "#1ABC9C"
+    },
+    {
+      "type": "richtext",
+      "id": "column_8_heading",
+      "label": "Heading",
+      "default": "<h3>Feature 8</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "column_8_text",
+      "label": "Text",
+      "default": "<p>Description of feature 8</p>"
+    },
+    {
+      "type": "select",
+      "id": "column_8_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Custom CSS"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_css",
+      "label": "Custom CSS"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero banner with features"
+    }
+  ]
+}
+{% endschema %}

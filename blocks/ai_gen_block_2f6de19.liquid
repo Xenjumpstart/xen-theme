@@ -1,0 +1,510 @@
+{% doc %}
+  @prompt
+    Create a 4-column image with text section with the following specifications:
+    
+    Layout Structure:
+    - Background banner with uploadable background image
+    - Banner title (H1) and body text positioned at top left
+    - 4 columns, each containing: rounded image, H1 title (bold), and body text
+    - Semi-transparent dark green overlay on the 4-column block section
+    
+    Responsive Behavior:
+    - Desktop: 5 columns per row, stacks if more than 5
+    - Mobile: 2 columns per row, stacks if more than 2
+    
+    Customization Settings:
+    - Upload background image for banner
+    - Upload individual images for each column block
+    - Adjust font sizes for titles and body text (desktop and mobile separately)
+    - Adjust text colors
+    - Custom CSS input field
+    - Image border-radius control for rounded corners
+    - Overlay opacity control for dark green transparent layer
+    
+    Design Details:
+    - All column titles must be bold by default
+    - Images should have rounded corners
+    - Dark green semi-transparent overlay on column section
+    - Responsive image handling for desktop and mobile versions
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-image-text-section-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-image-text-banner-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+    padding: 40px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .ai-image-text-banner-content-{{ ai_gen_id }} {
+    max-width: 600px;
+    color: {{ block.settings.banner_text_color }};
+  }
+
+  .ai-image-text-banner-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.banner_title_size_desktop }}px;
+    margin: 0 0 16px 0;
+    font-weight: 700;
+  }
+
+  .ai-image-text-banner-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.banner_text_size_desktop }}px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .ai-image-text-columns-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+  }
+
+  .ai-image-text-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.overlay_color }};
+    opacity: {{ block.settings.overlay_opacity }};
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .ai-image-text-columns-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    padding: 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ai-image-text-column-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ai-image-text-column-image-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    margin-bottom: 16px;
+  }
+
+  .ai-image-text-column-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    margin-bottom: 16px;
+  }
+
+  .ai-image-text-column-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+  }
+
+  .ai-image-text-column-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.column_title_size_desktop }}px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    color: {{ block.settings.column_title_color }};
+  }
+
+  .ai-image-text-column-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.column_text_size_desktop }}px;
+    margin: 0;
+    line-height: 1.6;
+    color: {{ block.settings.column_text_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-text-banner-{{ ai_gen_id }} {
+      padding: 24px;
+      min-height: 200px;
+    }
+
+    .ai-image-text-banner-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.banner_title_size_mobile }}px;
+    }
+
+    .ai-image-text-banner-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.banner_text_size_mobile }}px;
+    }
+
+    .ai-image-text-columns-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      padding: 24px;
+    }
+
+    .ai-image-text-column-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.column_title_size_mobile }}px;
+    }
+
+    .ai-image-text-column-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.column_text_size_mobile }}px;
+    }
+  }
+
+  {% if block.settings.custom_css != blank %}
+    {{ block.settings.custom_css }}
+  {% endif %}
+{% endstyle %}
+
+<image-text-section-{{ ai_gen_id }} class="ai-image-text-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div 
+    class="ai-image-text-banner-{{ ai_gen_id }}"
+    {% if block.settings.banner_background_image %}
+      style="background-image: url('{{ block.settings.banner_background_image | image_url: width: 2000 }}');"
+    {% else %}
+      style="background-color: #f4f4f4;"
+    {% endif %}
+  >
+    <div class="ai-image-text-banner-content-{{ ai_gen_id }}">
+      {% if block.settings.banner_title != blank %}
+        <h1 class="ai-image-text-banner-title-{{ ai_gen_id }}">{{ block.settings.banner_title }}</h1>
+      {% endif %}
+      {% if block.settings.banner_text != blank %}
+        <div class="ai-image-text-banner-text-{{ ai_gen_id }}">{{ block.settings.banner_text }}</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="ai-image-text-columns-wrapper-{{ ai_gen_id }}">
+    <div class="ai-image-text-overlay-{{ ai_gen_id }}"></div>
+    <div class="ai-image-text-columns-{{ ai_gen_id }}">
+      {% for i in (1..4) %}
+        {% liquid
+          assign image_key = 'column_' | append: i | append: '_image'
+          assign title_key = 'column_' | append: i | append: '_title'
+          assign text_key = 'column_' | append: i | append: '_text'
+          
+          assign column_image = block.settings[image_key]
+          assign column_title = block.settings[title_key]
+          assign column_text = block.settings[text_key]
+        %}
+        
+        <div class="ai-image-text-column-{{ ai_gen_id }}">
+          {% if column_image %}
+            <img 
+              src="{{ column_image | image_url: width: 600 }}" 
+              alt="{{ column_image.alt | escape }}"
+              class="ai-image-text-column-image-{{ ai_gen_id }}"
+              loading="lazy"
+              width="{{ column_image.width }}"
+              height="{{ column_image.height }}"
+            >
+          {% else %}
+            <div class="ai-image-text-column-image-placeholder-{{ ai_gen_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+          
+          {% if column_title != blank %}
+            <h2 class="ai-image-text-column-title-{{ ai_gen_id }}">{{ column_title }}</h2>
+          {% endif %}
+          
+          {% if column_text != blank %}
+            <div class="ai-image-text-column-text-{{ ai_gen_id }}">{{ column_text }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</image-text-section-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ImageTextSection{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.init();
+      }
+
+      init() {
+        const banner = this.querySelector('.ai-image-text-banner-{{ ai_gen_id }}');
+        if (banner && !banner.style.backgroundImage) {
+          banner.style.backgroundColor = '#f4f4f4';
+        }
+      }
+    }
+
+    customElements.define('image-text-section-{{ ai_gen_id }}', ImageTextSection{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Image with text columns",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner section"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "banner_title",
+      "label": "Title",
+      "default": "Welcome to Our Store"
+    },
+    {
+      "type": "richtext",
+      "id": "banner_text",
+      "label": "Body text",
+      "default": "<p>Discover our amazing collection of products</p>"
+    },
+    {
+      "type": "color",
+      "id": "banner_text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "banner_title_size_desktop",
+      "label": "Title size (desktop)",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "banner_title_size_mobile",
+      "label": "Title size (mobile)",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "banner_text_size_desktop",
+      "label": "Body text size (desktop)",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "banner_text_size_mobile",
+      "label": "Body text size (mobile)",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Column section"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#2d5016"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.5
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "column_title_color",
+      "label": "Title color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "column_text_color",
+      "label": "Body text color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "column_title_size_desktop",
+      "label": "Title size (desktop)",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "column_title_size_mobile",
+      "label": "Title size (mobile)",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "column_text_size_desktop",
+      "label": "Body text size (desktop)",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "column_text_size_mobile",
+      "label": "Body text size (mobile)",
+      "min": 12,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Column 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_1_title",
+      "label": "Title",
+      "default": "Feature One"
+    },
+    {
+      "type": "richtext",
+      "id": "column_1_text",
+      "label": "Body text",
+      "default": "<p>Description for feature one</p>"
+    },
+    {
+      "type": "header",
+      "content": "Column 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_2_title",
+      "label": "Title",
+      "default": "Feature Two"
+    },
+    {
+      "type": "richtext",
+      "id": "column_2_text",
+      "label": "Body text",
+      "default": "<p>Description for feature two</p>"
+    },
+    {
+      "type": "header",
+      "content": "Column 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_3_title",
+      "label": "Title",
+      "default": "Feature Three"
+    },
+    {
+      "type": "richtext",
+      "id": "column_3_text",
+      "label": "Body text",
+      "default": "<p>Description for feature three</p>"
+    },
+    {
+      "type": "header",
+      "content": "Column 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_4_title",
+      "label": "Title",
+      "default": "Feature Four"
+    },
+    {
+      "type": "richtext",
+      "id": "column_4_text",
+      "label": "Body text",
+      "default": "<p>Description for feature four</p>"
+    },
+    {
+      "type": "header",
+      "content": "Advanced"
+    },
+    {
+      "type": "html",
+      "id": "custom_css",
+      "label": "Custom CSS"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text columns"
+    }
+  ]
+}
+{% endschema %}
