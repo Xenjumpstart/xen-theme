@@ -119,9 +119,53 @@
     },
     "motion": {
       "type": "ep-motion",
+      "blocks": {
+        "benefit_ah9Vfr": {
+          "type": "benefit",
+          "settings": {
+            "title": "Ultra Smooth Movement",
+            "text": "Hydraulic-controlled damping for fluid, consistent travel on every cycle."
+          }
+        },
+        "benefit_JbgNfi": {
+          "type": "benefit",
+          "settings": {
+            "title": "Silent Soft-Close Technology",
+            "text": "German-engineered deceleration brings every door and shelf to rest in silence."
+          }
+        },
+        "benefit_KrF8tK": {
+          "type": "benefit",
+          "settings": {
+            "title": "Premium Engineered Components",
+            "text": "Aerospace aluminium alloy construction built to last beyond the decade."
+          }
+        },
+        "benefit_H8wJae": {
+          "type": "benefit",
+          "settings": {
+            "title": "Built for Modern Kitchens",
+            "text": "Designed for Singapore HDB and condominium cabinetry — no structural modification required."
+          }
+        },
+        "stat_yX3NgQ": {
+          "type": "stat",
+          "settings": {
+            "number": "",
+            "label": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit_ah9Vfr",
+        "benefit_JbgNfi",
+        "benefit_KrF8tK",
+        "benefit_H8wJae",
+        "stat_yX3NgQ"
+      ],
       "settings": {
         "eyebrow": "The Experience",
-        "heading": "<p>Every detail,<br><em>engineered</em><br>to disappear</p>",
+        "heading": "<p>Every detail,<br/><em>engineered</em><br/>to disappear</p>",
         "content": "<p>From the first touch to the final close, the Motion Series is engineered to make every interaction feel inevitable. The mechanism does the work. The finish earns its keep. The space remains yours.</p>"
       }
     },
