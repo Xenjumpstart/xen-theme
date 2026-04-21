@@ -9,9 +9,9 @@
 
     <div class="ep-hero-content">
       <div class="ep-eyebrow-row ep-reveal">
-        <div class="ep-eyebrow-line"></div>
+        <div class="ep-eyebrow-line">&nbsp;</div>
         <span>{{ section.settings.eyebrow }}</span>
-        <div class="ep-eyebrow-line"></div>
+        <div class="ep-eyebrow-line">&nbsp;</div>
       </div>
       <h1 class="ep-hero-headline ep-reveal ep-d1">
         {{ section.settings.heading_line_1 }}
@@ -30,7 +30,7 @@
 
     <div class="ep-scroll-cue">
       <span>Scroll</span>
-      <div class="ep-scroll-line"></div>
+      <div class="ep-scroll-line">&nbsp;</div>
     </div>
   </section>
 
@@ -39,13 +39,13 @@
     <div class="ep-marquee-track">
       {% for block in section.blocks %}
         {% if block.type == 'marquee_item' %}
-          <div class="ep-mq-item"><div class="ep-mq-dot"></div><span>{{ block.settings.text }}</span></div>
+          <div class="ep-mq-item"><div class="ep-mq-dot">&nbsp;</div><span>{{ block.settings.text }}</span></div>
         {% endif %}
       {% endfor %}
       {% comment %} Duplicate for seamless loop {% endcomment %}
       {% for block in section.blocks %}
         {% if block.type == 'marquee_item' %}
-          <div class="ep-mq-item"><div class="ep-mq-dot"></div><span>{{ block.settings.text }}</span></div>
+          <div class="ep-mq-item"><div class="ep-mq-dot">&nbsp;</div><span>{{ block.settings.text }}</span></div>
         {% endif %}
       {% endfor %}
     </div>
