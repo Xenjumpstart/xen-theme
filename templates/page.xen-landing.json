@@ -113,23 +113,79 @@
       "type": "ep-manifesto",
       "settings": {
         "eyebrow": "The Concept",
-        "heading": "<p>Motion that feels as refined<br>as the space it <em>inhabits</em></p>",
+        "heading": "<p>Motion that feels as refined<br/>as the space it <em>inhabits</em></p>",
         "content": "<p>ExcelPro Motion Series combines precision engineering with refined design to create cabinet motion that feels effortless, silent, and elegant. Each system is conceived not merely as hardware, but as a considered act of design — one that disappears into the architecture of your home, visible only in the quality of its movement.</p>"
       }
     },
     "motion": {
       "type": "ep-motion",
       "blocks": {
+        "benefit_KPdAck": {
+          "type": "benefit",
+          "settings": {
+            "title": "Ultra Smooth Movement",
+            "text": "Hydraulic-controlled damping for fluid, consistent travel on every cycle."
+          }
+        },
+        "benefit_9BLQJG": {
+          "type": "benefit",
+          "settings": {
+            "title": "Silent Soft-Close Technology",
+            "text": "German-engineered deceleration brings every door and shelf to rest in silence."
+          }
+        },
+        "benefit_THrMpf": {
+          "type": "benefit",
+          "settings": {
+            "title": "Premium Engineered Components",
+            "text": "Aerospace aluminium alloy construction built to last beyond the decade."
+          }
+        },
+        "benefit_camXTe": {
+          "type": "benefit",
+          "settings": {
+            "title": "Built for Modern Kitchens",
+            "text": "Designed for Singapore HDB and condominium cabinetry — no structural modification required."
+          }
+        },
         "stat_emtAhc": {
           "type": "stat",
           "settings": {
-            "number": "7<sup>by</sup>",
-            "label": "lorem ipsum"
+            "number": "7",
+            "label": "Motion Systems"
+          }
+        },
+        "stat_dWDQyR": {
+          "type": "stat",
+          "settings": {
+            "number": "20<sup>kg</sup>",
+            "label": "Load Capacity"
+          }
+        },
+        "stat_Lp7DDD": {
+          "type": "stat",
+          "settings": {
+            "number": "10<sup>yr</sup>",
+            "label": "Motor Warranty"
+          }
+        },
+        "stat_BjVkrD": {
+          "type": "stat",
+          "settings": {
+            "number": "SG",
+            "label": "Designed for Singapore"
           }
         }
       },
       "block_order": [
-        "stat_emtAhc"
+        "benefit_KPdAck",
+        "benefit_9BLQJG",
+        "benefit_THrMpf",
+        "benefit_camXTe",
+        "stat_emtAhc",
+        "stat_dWDQyR",
+        "stat_Lp7DDD",
+        "stat_BjVkrD"
       ],
       "settings": {
         "eyebrow": "The Experience",
