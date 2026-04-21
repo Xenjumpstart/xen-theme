@@ -19,6 +19,87 @@
     },
     "hero": {
       "type": "ep-hero",
+      "blocks": {
+        "marquee_item_98GR4K": {
+          "type": "marquee_item",
+          "settings": {
+            "text": "Velario"
+          }
+        },
+        "marquee_item_MCUAAj": {
+          "type": "marquee_item",
+          "settings": {
+            "text": "Nasconda"
+          }
+        },
+        "marquee_item_4bd7xt": {
+          "type": "marquee_item",
+          "settings": {
+            "text": "Strato"
+          }
+        },
+        "marquee_item_9MWDQK": {
+          "type": "marquee_item",
+          "settings": {
+            "text": "Vaseria"
+          }
+        },
+        "marquee_item_bcjiEB": {
+          "type": "marquee_item",
+          "settings": {
+            "text": "Podio"
+          }
+        },
+        "marquee_item_rijamP": {
+          "type": "marquee_item",
+          "settings": {
+            "text": "Podio"
+          }
+        },
+        "marquee_item_Y3DrzM": {
+          "type": "marquee_item",
+          "settings": {
+            "text": "Sospeso"
+          }
+        },
+        "marquee_item_RigKrz": {
+          "type": "marquee_item",
+          "settings": {
+            "text": "Riflesso"
+          }
+        },
+        "marquee_item_BGxPne": {
+          "type": "marquee_item",
+          "settings": {
+            "text": "Smart Motion"
+          }
+        },
+        "marquee_item_zGVxUV": {
+          "type": "marquee_item",
+          "settings": {
+            "text": "Silent Soft-Close"
+          }
+        },
+        "marquee_item_bt3eWx": {
+          "type": "marquee_item",
+          "settings": {
+            "text": "Premium Engineering"
+          }
+        }
+      },
+      "block_order": [
+        "marquee_item_98GR4K",
+        "marquee_item_MCUAAj",
+        "marquee_item_4bd7xt",
+        "marquee_item_9MWDQK",
+        "marquee_item_bcjiEB",
+        "marquee_item_rijamP",
+        "marquee_item_Y3DrzM",
+        "marquee_item_RigKrz",
+        "marquee_item_BGxPne",
+        "marquee_item_zGVxUV",
+        "marquee_item_bt3eWx"
+      ],
       "settings": {
         "eyebrow": "Excel Hardware · Singapore",
         "heading_line_1": "ExcelPro",
