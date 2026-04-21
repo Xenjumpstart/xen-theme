@@ -11,7 +11,6 @@
   "sections": {
     "main": {
       "type": "main-page",
-      "disabled": true,
       "settings": {
         "padding_top": 36,
         "padding_bottom": 36
@@ -19,87 +18,6 @@
     },
     "hero": {
       "type": "ep-hero",
-      "blocks": {
-        "marquee_item_98GR4K": {
-          "type": "marquee_item",
-          "settings": {
-            "text": "Velario"
-          }
-        },
-        "marquee_item_MCUAAj": {
-          "type": "marquee_item",
-          "settings": {
-            "text": "Nasconda"
-          }
-        },
-        "marquee_item_4bd7xt": {
-          "type": "marquee_item",
-          "settings": {
-            "text": "Strato"
-          }
-        },
-        "marquee_item_9MWDQK": {
-          "type": "marquee_item",
-          "settings": {
-            "text": "Vaseria"
-          }
-        },
-        "marquee_item_bcjiEB": {
-          "type": "marquee_item",
-          "settings": {
-            "text": "Podio"
-          }
-        },
-        "marquee_item_rijamP": {
-          "type": "marquee_item",
-          "settings": {
-            "text": "Podio"
-          }
-        },
-        "marquee_item_Y3DrzM": {
-          "type": "marquee_item",
-          "settings": {
-            "text": "Sospeso"
-          }
-        },
-        "marquee_item_RigKrz": {
-          "type": "marquee_item",
-          "settings": {
-            "text": "Riflesso"
-          }
-        },
-        "marquee_item_BGxPne": {
-          "type": "marquee_item",
-          "settings": {
-            "text": "Smart Motion"
-          }
-        },
-        "marquee_item_zGVxUV": {
-          "type": "marquee_item",
-          "settings": {
-            "text": "Silent Soft-Close"
-          }
-        },
-        "marquee_item_bt3eWx": {
-          "type": "marquee_item",
-          "settings": {
-            "text": "Premium Engineering"
-          }
-        }
-      },
-      "block_order": [
-        "marquee_item_98GR4K",
-        "marquee_item_MCUAAj",
-        "marquee_item_4bd7xt",
-        "marquee_item_9MWDQK",
-        "marquee_item_bcjiEB",
-        "marquee_item_rijamP",
-        "marquee_item_Y3DrzM",
-        "marquee_item_RigKrz",
-        "marquee_item_BGxPne",
-        "marquee_item_zGVxUV",
-        "marquee_item_bt3eWx"
-      ],
       "settings": {
         "eyebrow": "Excel Hardware · Singapore",
         "heading_line_1": "ExcelPro",
@@ -113,79 +31,23 @@
       "type": "ep-manifesto",
       "settings": {
         "eyebrow": "The Concept",
-        "heading": "<p>Motion that feels as refined<br/>as the space it <em>inhabits</em></p>",
+        "heading": "<p>Motion that feels as refined<br>as the space it <em>inhabits</em></p>",
         "content": "<p>ExcelPro Motion Series combines precision engineering with refined design to create cabinet motion that feels effortless, silent, and elegant. Each system is conceived not merely as hardware, but as a considered act of design — one that disappears into the architecture of your home, visible only in the quality of its movement.</p>"
       }
     },
     "motion": {
       "type": "ep-motion",
       "blocks": {
-        "benefit_ah9Vfr": {
-          "type": "benefit",
-          "settings": {
-            "title": "Ultra Smooth Movement",
-            "text": "Hydraulic-controlled damping for fluid, consistent travel on every cycle."
-          }
-        },
-        "benefit_JbgNfi": {
-          "type": "benefit",
-          "settings": {
-            "title": "Silent Soft-Close Technology",
-            "text": "German-engineered deceleration brings every door and shelf to rest in silence."
-          }
-        },
-        "benefit_KrF8tK": {
-          "type": "benefit",
-          "settings": {
-            "title": "Premium Engineered Components",
-            "text": "Aerospace aluminium alloy construction built to last beyond the decade."
-          }
-        },
-        "benefit_H8wJae": {
-          "type": "benefit",
-          "settings": {
-            "title": "Built for Modern Kitchens",
-            "text": "Designed for Singapore HDB and condominium cabinetry — no structural modification required."
-          }
-        },
-        "stat_yX3NgQ": {
+        "stat_emtAhc": {
           "type": "stat",
           "settings": {
-            "number": "7",
-            "label": "Motion Systems"
-          }
-        },
-        "stat_nhAYwQ": {
-          "type": "stat",
-          "settings": {
-            "number": "20<sup>kg</sup>",
-            "label": "Load Capacity"
-          }
-        },
-        "stat_brcNxR": {
-          "type": "stat",
-          "settings": {
-            "number": "10<sup>yr</sup>",
-            "label": "Motor Warranty"
-          }
-        },
-        "stat_nb6YRz": {
-          "type": "stat",
-          "settings": {
-            "number": "SG",
-            "label": "Designed for Singapore"
+            "number": "7<sup>by</sup>",
+            "label": "lorem ipsum"
           }
         }
       },
       "block_order": [
-        "benefit_ah9Vfr",
-        "benefit_JbgNfi",
-        "benefit_KrF8tK",
-        "benefit_H8wJae",
-        "stat_yX3NgQ",
-        "stat_nhAYwQ",
-        "stat_brcNxR",
-        "stat_nb6YRz"
+        "stat_emtAhc"
       ],
       "settings": {
         "eyebrow": "The Experience",
@@ -213,7 +75,7 @@
       "settings": {
         "bg_word": "Motion",
         "eyebrow": "Experience It",
-        "heading": "<p>Upgrade Your<br><em>Cabinet Experience</em></p>",
+        "heading": "<p>Upgrade Your<br/><em>Cabinet Experience</em></p>",
         "subheading": "<p>Discover the complete ExcelPro Motion Series — seven premium motion systems for the kitchen and wardrobe, engineered for modern Singapore living.</p>",
         "button_1_label": "Explore Motion Series",
         "button_1_url": "",
