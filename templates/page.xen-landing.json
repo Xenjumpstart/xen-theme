@@ -11,31 +11,66 @@
   "sections": {
     "main": {
       "type": "main-page",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "hero": {
       "type": "ep-hero",
-      "settings": {}
+      "settings": {
+        "eyebrow": "Excel Hardware · Singapore",
+        "heading_line_1": "ExcelPro",
+        "heading_line_2": "Motion Series",
+        "subheading": "Precision Motion. Effortless Living.",
+        "button_label": "Explore the Collection",
+        "button_url": ""
+      }
     },
     "manifesto": {
       "type": "ep-manifesto",
-      "settings": {}
+      "settings": {
+        "eyebrow": "The Concept",
+        "heading": "<p>Motion that feels as refined<br/>as the space it <em>inhabits</em></p>",
+        "content": "<p>ExcelPro Motion Series combines precision engineering with refined design to create cabinet motion that feels effortless, silent, and elegant. Each system is conceived not merely as hardware, but as a considered act of design — one that disappears into the architecture of your home, visible only in the quality of its movement.</p>"
+      }
     },
     "motion": {
       "type": "ep-motion",
-      "settings": {}
+      "settings": {
+        "eyebrow": "The Experience",
+        "heading": "<p>Every detail,<br><em>engineered</em><br>to disappear</p>",
+        "content": "<p>From the first touch to the final close, the Motion Series is engineered to make every interaction feel inevitable. The mechanism does the work. The finish earns its keep. The space remains yours.</p>"
+      }
     },
     "products": {
       "type": "ep-products",
-      "settings": {}
+      "settings": {
+        "eyebrow": "The Collection",
+        "heading": "<p>Seven systems.<br><em>One philosophy.</em></p>",
+        "description": "<p>Each product in the Motion Series is named in Italian — a language that has always understood beauty as inseparable from function.</p>"
+      }
     },
     "features": {
       "type": "ep-features",
-      "settings": {}
+      "settings": {
+        "eyebrow": "Why Motion Series",
+        "heading": "<p>Built to a standard<br>you can <em>feel</em></p>"
+      }
     },
     "cta": {
       "type": "ep-cta",
-      "settings": {}
+      "settings": {
+        "bg_word": "Motion",
+        "eyebrow": "Experience It",
+        "heading": "<p>Upgrade Your<br><em>Cabinet Experience</em></p>",
+        "subheading": "<p>Discover the complete ExcelPro Motion Series — seven premium motion systems for the kitchen and wardrobe, engineered for modern Singapore living.</p>",
+        "button_1_label": "Explore Motion Series",
+        "button_1_url": "",
+        "button_2_label": "Contact Us",
+        "button_2_url": ""
+      }
     }
   },
   "order": [
