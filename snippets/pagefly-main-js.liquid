@@ -29,7 +29,7 @@
         pf_page_subject_id: '{{ page.id }}',
         {% if template.name == 'product' %}
           
-    {% assign initial_image_url = product.featured_image | img_url %}
+    {% assign initial_image_url = product.featured_image | image_url: width: 480 %}
     {% assign dynamic_image_path = initial_image_url %}
     {% assign BASE_URL = "//cdn.shopify.com/s/files/" %}
     {% if initial_image_url and initial_image_url contains BASE_URL %}
@@ -43,7 +43,7 @@
         {% endif %}
         {% if template.name == 'collection' %}
           
-    {% assign initial_image_url = collection.featured_image | img_url %}
+    {% assign initial_image_url = collection.featured_image | image_url: width: 480 %}
     {% assign dynamic_image_path = initial_image_url %}
     {% assign BASE_URL = "//cdn.shopify.com/s/files/" %}
     {% if initial_image_url and initial_image_url contains BASE_URL %}
