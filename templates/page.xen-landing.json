@@ -151,8 +151,29 @@
         "stat_yX3NgQ": {
           "type": "stat",
           "settings": {
-            "number": "",
-            "label": ""
+            "number": "7",
+            "label": "Motion Systems"
+          }
+        },
+        "stat_nhAYwQ": {
+          "type": "stat",
+          "settings": {
+            "number": "20<sup>kg</sup>",
+            "label": "Load Capacity"
+          }
+        },
+        "stat_brcNxR": {
+          "type": "stat",
+          "settings": {
+            "number": "10<sup>yr</sup>",
+            "label": "Motor Warranty"
+          }
+        },
+        "stat_nb6YRz": {
+          "type": "stat",
+          "settings": {
+            "number": "SG",
+            "label": "Designed for Singapore"
           }
         }
       },
@@ -161,7 +182,10 @@
         "benefit_JbgNfi",
         "benefit_KrF8tK",
         "benefit_H8wJae",
-        "stat_yX3NgQ"
+        "stat_yX3NgQ",
+        "stat_nhAYwQ",
+        "stat_brcNxR",
+        "stat_nb6YRz"
       ],
       "settings": {
         "eyebrow": "The Experience",
