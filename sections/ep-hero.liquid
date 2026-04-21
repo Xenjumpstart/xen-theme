@@ -1,0 +1,131 @@
+
+{{ 'excelpro-motion.css' | asset_url | stylesheet_tag }}
+
+<div class="ep-wrap">
+  <section class="ep-hero">
+    <div class="ep-hero-bg" id="epHeroBg" style="background-image: url('{{ section.settings.background_image | img_url: '2000x' }}');"></div>
+    <div class="ep-hero-overlay"></div>
+    <div class="ep-hero-fade"></div>
+
+    <div class="ep-hero-content">
+      <div class="ep-eyebrow-row ep-reveal">
+        <div class="ep-eyebrow-line"></div>
+        <span>{{ section.settings.eyebrow }}</span>
+        <div class="ep-eyebrow-line"></div>
+      </div>
+      <h1 class="ep-hero-headline ep-reveal ep-d1">
+        {{ section.settings.heading_line_1 }}
+        <em>{{ section.settings.heading_line_2 }}</em>
+      </h1>
+      <p class="ep-hero-sub ep-reveal ep-d2">{{ section.settings.subheading }}</p>
+      {% if section.settings.button_label != blank %}
+        <a href="{{ section.settings.button_url }}" class="ep-hero-btn ep-reveal ep-d3">
+          {{ section.settings.button_label }}
+          <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+            <path d="M1 5h14M10 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="ep-scroll-cue">
+      <span>Scroll</span>
+      <div class="ep-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="ep-marquee-strip">
+    <div class="ep-marquee-track">
+      {% for block in section.blocks %}
+        {% if block.type == 'marquee_item' %}
+          <div class="ep-mq-item"><div class="ep-mq-dot"></div><span>{{ block.settings.text }}</span></div>
+        {% endif %}
+      {% endfor %}
+      {% comment %} Duplicate for seamless loop {% endcomment %}
+      {% for block in section.blocks %}
+        {% if block.type == 'marquee_item' %}
+          <div class="ep-mq-item"><div class="ep-mq-dot"></div><span>{{ block.settings.text }}</span></div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero & Marquee",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Excel Hardware · Singapore"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading Line 1",
+      "default": "ExcelPro"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading Line 2 (Italic)",
+      "default": "Motion Series"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Precision Motion. Effortless Living."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Explore the Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "marquee_item",
+      "name": "Marquee Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero & Marquee",
+      "blocks": [
+        { "type": "marquee_item", "settings": { "text": "Velario" } },
+        { "type": "marquee_item", "settings": { "text": "Nasconda" } },
+        { "type": "marquee_item", "settings": { "text": "Strato" } },
+        { "type": "marquee_item", "settings": { "text": "Vaseria" } },
+        { "type": "marquee_item", "settings": { "text": "Podio" } },
+        { "type": "marquee_item", "settings": { "text": "Sospeso" } },
+        { "type": "marquee_item", "settings": { "text": "Riflesso" } },
+        { "type": "marquee_item", "settings": { "text": "Smart Motion" } },
+        { "type": "marquee_item", "settings": { "text": "Silent Soft-Close" } },
+        { "type": "marquee_item", "settings": { "text": "Premium Engineering" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

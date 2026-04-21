@@ -1,0 +1,50 @@
+
+<div class="ep-wrap">
+  <section class="ep-manifesto">
+    <div class="ep-manifesto-inner">
+      <div class="ep-eyebrow-center ep-reveal">
+        <div class="ep-eyebrow-bar"></div>
+        <span>{{ section.settings.eyebrow }}</span>
+        <div class="ep-eyebrow-bar"></div>
+      </div>
+      <h2 class="ep-manifesto-headline ep-reveal ep-d1">
+        {{ section.settings.heading }}
+      </h2>
+      <div class="ep-manifesto-body ep-reveal ep-d2">
+        {{ section.settings.content }}
+      </div>
+      <div class="ep-rule-center ep-reveal ep-d3"></div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Brand Manifesto",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "The Concept"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Motion that feels as refined<br>as the space it <em>inhabits</em></p>"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p>ExcelPro Motion Series combines precision engineering with refined design to create cabinet motion that feels effortless, silent, and elegant. Each system is conceived not merely as hardware, but as a considered act of design — one that disappears into the architecture of your home, visible only in the quality of its movement.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Manifesto"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,50 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "hero": {
+      "type": "ep-hero",
+      "settings": {}
+    },
+    "manifesto": {
+      "type": "ep-manifesto",
+      "settings": {}
+    },
+    "motion": {
+      "type": "ep-motion",
+      "settings": {}
+    },
+    "products": {
+      "type": "ep-products",
+      "settings": {}
+    },
+    "features": {
+      "type": "ep-features",
+      "settings": {}
+    },
+    "cta": {
+      "type": "ep-cta",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "hero",
+    "manifesto",
+    "motion",
+    "products",
+    "features",
+    "cta"
+  ]
+}

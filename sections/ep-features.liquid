@@ -1,0 +1,100 @@
+
+<div class="ep-wrap">
+  <section class="ep-features">
+    <div class="ep-features-inner">
+      <div class="ep-features-header">
+        <div class="ep-feat-eyebrow ep-reveal">
+          <div class="ep-feat-eyebrow-bar"></div>
+          <span>{{ section.settings.eyebrow }}</span>
+          <div class="ep-feat-eyebrow-bar"></div>
+        </div>
+        <h2 class="ep-feat-title ep-reveal ep-d1">
+          {{ section.settings.heading }}
+        </h2>
+      </div>
+
+      <div class="ep-feat-grid">
+        {% for block in section.blocks %}
+          <div class="ep-feat-item ep-reveal ep-d{{ forloop.index0 }}">
+            <div class="ep-feat-icon">
+              {{ block.settings.svg_icon }}
+            </div>
+            <div class="ep-feat-rule"></div>
+            <div class="ep-feat-name">{{ block.settings.title }}</div>
+            <p class="ep-feat-desc">{{ block.settings.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Features",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Why Motion Series"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Built to a standard<br>you can <em>feel</em></p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "html", "id": "svg_icon", "label": "SVG Icon" },
+        { "type": "richtext", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "description", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features",
+      "blocks": [
+        { 
+          "type": "feature", 
+          "settings": { 
+            "svg_icon": "<svg viewBox=\"0 0 44 44\" fill=\"none\"><circle cx=\"22\" cy=\"22\" r=\"14\" stroke=\"#c4953a\" stroke-width=\"1\"/><path d=\"M22 12v10l6 4\" stroke=\"#c4953a\" stroke-width=\"1.2\" stroke-linecap=\"round\"/><circle cx=\"22\" cy=\"22\" r=\"2\" fill=\"#c4953a\"/></svg>",
+            "title": "<p>Precision<br><em>Engineering</em></p>",
+            "description": "Calibrated to micrometric tolerances, ensuring consistent performance across ten thousand cycles."
+          } 
+        },
+        { 
+          "type": "feature", 
+          "settings": { 
+            "svg_icon": "<svg viewBox=\"0 0 44 44\" fill=\"none\"><path d=\"M8 22c0-7.732 6.268-14 14-14s14 6.268 14 14\" stroke=\"#c4953a\" stroke-width=\"1\" stroke-linecap=\"round\"/><path d=\"M14 26c0 4.418 3.582 8 8 8s8-3.582 8-8\" stroke=\"#c4953a\" stroke-width=\"1\" stroke-linecap=\"round\"/><line x1=\"22\" y1=\"18\" x2=\"22\" y2=\"30\" stroke=\"#c4953a\" stroke-width=\"1.2\" stroke-linecap=\"round\"/></svg>",
+            "title": "<p>Silent<br><em>Motion</em></p>",
+            "description": "German-engineered soft-close damping technology — motion heard only in its absence."
+          } 
+        },
+        { 
+          "type": "feature", 
+          "settings": { 
+            "svg_icon": "<svg viewBox=\"0 0 44 44\" fill=\"none\"><rect x=\"10\" y=\"14\" width=\"24\" height=\"16\" rx=\"1\" stroke=\"#c4953a\" stroke-width=\"1\"/><path d=\"M16 22h12M22 18v8\" stroke=\"#c4953a\" stroke-width=\"1.2\" stroke-linecap=\"round\"/><path d=\"M10 30l4 4h16l4-4\" stroke=\"#c4953a\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+            "title": "<p>Durability<br><em>Tested</em></p>",
+            "description": "Aerospace aluminium alloy construction with 10-year motor warranties. Built for decades, not seasons."
+          } 
+        },
+        { 
+          "type": "feature", 
+          "settings": { 
+            "svg_icon": "<svg viewBox=\"0 0 44 44\" fill=\"none\"><path d=\"M22 8l2.6 8h8.4l-6.8 4.9 2.6 8L22 24l-6.8 4.9 2.6-8L11 16h8.4z\" stroke=\"#c4953a\" stroke-width=\"1\" stroke-linejoin=\"round\"/><circle cx=\"22\" cy=\"30\" r=\"5\" stroke=\"#c4953a\" stroke-width=\"1\"/></svg>",
+            "title": "<p>Premium<br><em>Materials</em></p>",
+            "description": "Matte-finish aluminium alloy, tempered glass, Italian-lacquered components. A standard felt before it is seen."
+          } 
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,93 @@
+
+<div class="ep-wrap">
+  <section class="ep-products" id="ep-products">
+    <div class="ep-products-header">
+      <div>
+        <div class="ep-prod-eyebrow ep-reveal">
+          <div class="ep-prod-eyebrow-line"></div>
+          <span>{{ section.settings.eyebrow }}</span>
+        </div>
+        <h2 class="ep-prod-title ep-reveal ep-d1">
+          {{ section.settings.heading }}
+        </h2>
+      </div>
+      <div class="ep-prod-desc ep-reveal ep-d2">
+        {{ section.settings.description }}
+      </div>
+    </div>
+
+    <div class="ep-product-grid">
+      {% for block in section.blocks %}
+        <a class="ep-card ep-reveal ep-d{{ forloop.index0 }}" href="{{ block.settings.link }}">
+          <div class="ep-card-img-wrap">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | img_url: '800x600', crop: 'center' }}" alt="{{ block.settings.name }}" loading="lazy">
+            {% endif %}
+            <div class="ep-card-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+          </div>
+          <div class="ep-card-body">
+            <div class="ep-card-cat">{{ block.settings.category }}</div>
+            <div class="ep-card-name">{{ block.settings.name }}</div>
+            <div class="ep-card-tagline">{{ block.settings.tagline }}</div>
+            <div class="ep-card-cta">
+              Discover
+              <svg width="14" height="9" viewBox="0 0 14 9" fill="none">
+                <path d="M1 4.5h12M8.5 1l3.5 3.5L8.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Product Showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "The Collection"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Seven systems.<br><em>One philosophy.</em></p>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Each product in the Motion Series is named in Italian — a language that has always understood beauty as inseparable from function.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "category", "label": "Category" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "tagline", "label": "Tagline" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Showcase",
+      "blocks": [
+        { "type": "product", "settings": { "category": "Kitchen · Smart Door Series", "name": "Velario", "tagline": "Touch-activated smart glass cabinet door lift — the door that reveals." } },
+        { "type": "product", "settings": { "category": "Kitchen · Lift Rack System", "name": "Nasconda", "tagline": "Precision automatic lift rack system — engineered to emerge." } },
+        { "type": "product", "settings": { "category": "Kitchen · Double Layer Series", "name": "Strato", "tagline": "Dual-motor two-tier automatic cabinet lift — organised layers." } },
+        { "type": "product", "settings": { "category": "Kitchen · Lift Rack System", "name": "Vaseria", "tagline": "Matte black automatic lift rack — vessel keeper." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

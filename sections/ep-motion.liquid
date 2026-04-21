@@ -1,0 +1,109 @@
+
+<div class="ep-wrap">
+  <section class="ep-motion">
+    <div class="ep-motion-visual ep-reveal-l">
+      <div class="ep-motion-img" id="epMotionImg" style="background-image: url('{{ section.settings.image | img_url: '1200x' }}');"></div>
+      <div class="ep-motion-grad"></div>
+    </div>
+    <div class="ep-motion-text">
+      <div class="ep-motion-eyebrow ep-reveal">
+        <div class="ep-motion-eyebrow-line"></div>
+        <span>{{ section.settings.eyebrow }}</span>
+      </div>
+      <h2 class="ep-motion-headline ep-reveal ep-d1">
+        {{ section.settings.heading }}
+      </h2>
+      <div class="ep-motion-body ep-reveal ep-d2">
+        {{ section.settings.content }}
+      </div>
+      <ul class="ep-benefits">
+        {% for block in section.blocks %}
+          {% if block.type == 'benefit' %}
+            <li class="ep-reveal ep-d{{ forloop.index | plus: 1 }}">
+              <div>
+                <span class="ep-benefit-title">{{ block.settings.title }}</span>
+                {{ block.settings.text }}
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="ep-stats">
+    {% for block in section.blocks %}
+      {% if block.type == 'stat' %}
+        <div class="ep-stat ep-reveal ep-d{{ forloop.index0 }}">
+          <div class="ep-stat-num">{{ block.settings.number }}</div>
+          <div class="ep-stat-label">{{ block.settings.label }}</div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Motion & Stats",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "The Experience"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Every detail,<br><em>engineered</em><br>to disappear</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p>From the first touch to the final close, the Motion Series is engineered to make every interaction feel inevitable. The mechanism does the work. The finish earns its keep. The space remains yours.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number" },
+        { "type": "text", "id": "label", "label": "Label" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Motion & Stats",
+      "blocks": [
+        { "type": "benefit", "settings": { "title": "Ultra Smooth Movement", "text": "Hydraulic-controlled damping for fluid, consistent travel on every cycle." } },
+        { "type": "benefit", "settings": { "title": "Silent Soft-Close Technology", "text": "German-engineered deceleration brings every door and shelf to rest in silence." } },
+        { "type": "benefit", "settings": { "title": "Premium Engineered Components", "text": "Aerospace aluminium alloy construction built to last beyond the decade." } },
+        { "type": "benefit", "settings": { "title": "Built for Modern Kitchens", "text": "Designed for Singapore HDB and condominium cabinetry — no structural modification required." } },
+        { "type": "stat", "settings": { "number": "7", "label": "Motion Systems" } },
+        { "type": "stat", "settings": { "number": "20kg", "label": "Load Capacity" } },
+        { "type": "stat", "settings": { "number": "10yr", "label": "Motor Warranty" } },
+        { "type": "stat", "settings": { "number": "SG", "label": "Designed for Singapore" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

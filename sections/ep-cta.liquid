@@ -1,0 +1,98 @@
+
+<div class="ep-wrap">
+  <section class="ep-cta">
+    <div class="ep-cta-bg-word">{{ section.settings.bg_word }}</div>
+    <div class="ep-cta-inner">
+      <div class="ep-cta-eyebrow ep-reveal">
+        <div class="ep-cta-eyebrow-bar"></div>
+        <span>{{ section.settings.eyebrow }}</span>
+        <div class="ep-cta-eyebrow-bar"></div>
+      </div>
+      <h2 class="ep-cta-headline ep-reveal ep-d1">
+        {{ section.settings.heading }}
+      </h2>
+      <div class="ep-cta-sub ep-reveal ep-d2">
+        {{ section.settings.subheading }}
+      </div>
+      <div class="ep-cta-btns ep-reveal ep-d3">
+        {% if section.settings.button_1_label != blank %}
+          <a href="{{ section.settings.button_1_url }}" class="ep-btn-gold">
+            {{ section.settings.button_1_label }}
+            <svg width="14" height="9" viewBox="0 0 14 9" fill="none">
+              <path d="M1 4.5h12M8.5 1l3.5 3.5L8.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {% endif %}
+        {% if section.settings.button_2_label != blank %}
+          <a href="{{ section.settings.button_2_url }}" class="ep-btn-ghost">
+            {{ section.settings.button_2_label }}
+            <svg width="14" height="9" viewBox="0 0 14 9" fill="none">
+              <path d="M1 4.5h12M8.5 1l3.5 3.5L8.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="{{ 'excelpro-motion.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Call to Action",
+  "settings": [
+    {
+      "type": "text",
+      "id": "bg_word",
+      "label": "Background Watermark Word",
+      "default": "Motion"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Experience It"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Upgrade Your<br><em>Cabinet Experience</em></p>"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Discover the complete ExcelPro Motion Series — seven premium motion systems for the kitchen and wardrobe, engineered for modern Singapore living.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_1_label",
+      "label": "Button 1 Label",
+      "default": "Explore Motion Series"
+    },
+    {
+      "type": "url",
+      "id": "button_1_url",
+      "label": "Button 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Button 2 Label",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "button_2_url",
+      "label": "Button 2 URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Call to Action"
+    }
+  ]
+}
+{% endschema %}

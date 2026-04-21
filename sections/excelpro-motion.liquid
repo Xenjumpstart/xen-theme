@@ -1,0 +1,321 @@
+
+{{ 'excelpro-motion.css' | asset_url | stylesheet_tag }}
+
+<div class="ep-wrap">
+
+  <!-- 1 · HERO -->
+  <section class="ep-hero">
+    <div class="ep-hero-bg" id="epHeroBg" style="background-image: url('{{ section.settings.hero_bg | img_url: '2000x' }}');"></div>
+    <div class="ep-hero-overlay"></div>
+    <div class="ep-hero-fade"></div>
+
+    <div class="ep-hero-content">
+      <div class="ep-eyebrow-row ep-reveal">
+        <div class="ep-eyebrow-line"></div>
+        <span>{{ section.settings.hero_eyebrow }}</span>
+        <div class="ep-eyebrow-line"></div>
+      </div>
+      <h1 class="ep-hero-headline ep-reveal ep-d1">
+        {{ section.settings.hero_heading_1 }}
+        <em>{{ section.settings.hero_heading_2 }}</em>
+      </h1>
+      <p class="ep-hero-sub ep-reveal ep-d2">{{ section.settings.hero_subheading }}</p>
+      {% if section.settings.hero_btn_label != blank %}
+        <a href="{{ section.settings.hero_btn_url }}" class="ep-hero-btn ep-reveal ep-d3">
+          {{ section.settings.hero_btn_label }}
+          <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+            <path d="M1 5h14M10 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="ep-scroll-cue">
+      <span>Scroll</span>
+      <div class="ep-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="ep-marquee-strip">
+    <div class="ep-marquee-track">
+      {% for i in (1..2) %}
+        {% for block in section.blocks %}
+          {% if block.type == 'marquee_item' %}
+            <div class="ep-mq-item"><div class="ep-mq-dot"></div><span>{{ block.settings.text }}</span></div>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- 2 · BRAND MANIFESTO -->
+  <section class="ep-manifesto">
+    <div class="ep-manifesto-inner">
+      <div class="ep-eyebrow-center ep-reveal">
+        <div class="ep-eyebrow-bar"></div>
+        <span>{{ section.settings.manifesto_eyebrow }}</span>
+        <div class="ep-eyebrow-bar"></div>
+      </div>
+      <h2 class="ep-manifesto-headline ep-reveal ep-d1">
+        {{ section.settings.manifesto_heading }}
+      </h2>
+      <div class="ep-manifesto-body ep-reveal ep-d2">
+        {{ section.settings.manifesto_content }}
+      </div>
+      <div class="ep-rule-center ep-reveal ep-d3"></div>
+    </div>
+  </section>
+
+  <!-- 3 · MOTION EXPERIENCE -->
+  <section class="ep-motion">
+    <div class="ep-motion-visual ep-reveal-l">
+      <div class="ep-motion-img" id="epMotionImg" style="background-image: url('{{ section.settings.motion_image | img_url: '1200x' }}');"></div>
+      <div class="ep-motion-grad"></div>
+    </div>
+    <div class="ep-motion-text">
+      <div class="ep-motion-eyebrow ep-reveal">
+        <div class="ep-motion-eyebrow-line"></div>
+        <span>{{ section.settings.motion_eyebrow }}</span>
+      </div>
+      <h2 class="ep-motion-headline ep-reveal ep-d1">
+        {{ section.settings.motion_heading }}
+      </h2>
+      <div class="ep-motion-body ep-reveal ep-d2">
+        {{ section.settings.motion_content }}
+      </div>
+      <ul class="ep-benefits">
+        {% for block in section.blocks %}
+          {% if block.type == 'benefit' %}
+            <li class="ep-reveal ep-d{{ forloop.index | plus: 1 }}">
+              <div>
+                <span class="ep-benefit-title">{{ block.settings.title }}</span>
+                {{ block.settings.text }}
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="ep-stats">
+    {% for block in section.blocks %}
+      {% if block.type == 'stat' %}
+        <div class="ep-stat ep-reveal ep-d{{ forloop.index0 }}">
+          <div class="ep-stat-num">{{ block.settings.number }}</div>
+          <div class="ep-stat-label">{{ block.settings.label }}</div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <!-- 4 · PRODUCT SHOWCASE -->
+  <section class="ep-products" id="ep-products">
+    <div class="ep-products-header">
+      <div>
+        <div class="ep-prod-eyebrow ep-reveal">
+          <div class="ep-prod-eyebrow-line"></div>
+          <span>{{ section.settings.products_eyebrow }}</span>
+        </div>
+        <h2 class="ep-prod-title ep-reveal ep-d1">
+          {{ section.settings.products_heading }}
+        </h2>
+      </div>
+      <div class="ep-prod-desc ep-reveal ep-d2">
+        {{ section.settings.products_description }}
+      </div>
+    </div>
+
+    <div class="ep-product-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'product' %}
+          <a class="ep-card ep-reveal ep-d{{ forloop.index0 }}" href="{{ block.settings.link }}">
+            <div class="ep-card-img-wrap">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | img_url: '800x600', crop: 'center' }}" alt="{{ block.settings.name }}" loading="lazy">
+              {% endif %}
+              <div class="ep-card-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-cat">{{ block.settings.category }}</div>
+              <div class="ep-card-name">{{ block.settings.name }}</div>
+              <div class="ep-card-tagline">{{ block.settings.tagline }}</div>
+              <div class="ep-card-cta">
+                Discover
+                <svg width="14" height="9" viewBox="0 0 14 9" fill="none">
+                  <path d="M1 4.5h12M8.5 1l3.5 3.5L8.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- 5 · FEATURES -->
+  <section class="ep-features">
+    <div class="ep-features-inner">
+      <div class="ep-features-header">
+        <div class="ep-feat-eyebrow ep-reveal">
+          <div class="ep-feat-eyebrow-bar"></div>
+          <span>{{ section.settings.features_eyebrow }}</span>
+          <div class="ep-feat-eyebrow-bar"></div>
+        </div>
+        <h2 class="ep-feat-title ep-reveal ep-d1">
+          {{ section.settings.features_heading }}
+        </h2>
+      </div>
+
+      <div class="ep-feat-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'feature' %}
+            <div class="ep-feat-item ep-reveal ep-d{{ forloop.index0 }}">
+              <div class="ep-feat-icon">
+                {{ block.settings.svg_icon }}
+              </div>
+              <div class="ep-feat-rule"></div>
+              <div class="ep-feat-name">{{ block.settings.title }}</div>
+              <p class="ep-feat-desc">{{ block.settings.description }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · CALL TO ACTION -->
+  <section class="ep-cta">
+    <div class="ep-cta-bg-word">{{ section.settings.cta_bg_word }}</div>
+    <div class="ep-cta-inner">
+      <div class="ep-cta-eyebrow ep-reveal">
+        <div class="ep-cta-eyebrow-bar"></div>
+        <span>{{ section.settings.cta_eyebrow }}</span>
+        <div class="ep-cta-eyebrow-bar"></div>
+      </div>
+      <h2 class="ep-cta-headline ep-reveal ep-d1">
+        {{ section.settings.cta_heading }}
+      </h2>
+      <div class="ep-cta-sub ep-reveal ep-d2">
+        {{ section.settings.cta_subheading }}
+      </div>
+      <div class="ep-cta-btns ep-reveal ep-d3">
+        {% if section.settings.cta_btn1_label != blank %}
+          <a href="{{ section.settings.cta_btn1_url }}" class="ep-btn-gold">
+            {{ section.settings.cta_btn1_label }}
+            <svg width="14" height="9" viewBox="0 0 14 9" fill="none">
+              <path d="M1 4.5h12M8.5 1l3.5 3.5L8.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {% endif %}
+        {% if section.settings.cta_btn2_label != blank %}
+          <a href="{{ section.settings.cta_btn2_url }}" class="ep-btn-ghost">
+            {{ section.settings.cta_btn2_label }}
+            <svg width="14" height="9" viewBox="0 0 14 9" fill="none">
+              <path d="M1 4.5h12M8.5 1l3.5 3.5L8.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="{{ 'excelpro-motion.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "ExcelPro Full Page",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_bg", "label": "Background Image" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Excel Hardware · Singapore" },
+    { "type": "text", "id": "hero_heading_1", "label": "Heading Line 1", "default": "ExcelPro" },
+    { "type": "text", "id": "hero_heading_2", "label": "Heading Line 2", "default": "Motion Series" },
+    { "type": "text", "id": "hero_subheading", "label": "Subheading", "default": "Precision Motion. Effortless Living." },
+    { "type": "text", "id": "hero_btn_label", "label": "Button Label", "default": "Explore the Collection" },
+    { "type": "url", "id": "hero_btn_url", "label": "Button URL" },
+    
+    { "type": "header", "content": "Manifesto" },
+    { "type": "text", "id": "manifesto_eyebrow", "label": "Eyebrow", "default": "The Concept" },
+    { "type": "richtext", "id": "manifesto_heading", "label": "Heading", "default": "<p>Motion that feels as refined<br>as the space it <em>inhabits</em></p>" },
+    { "type": "richtext", "id": "manifesto_content", "label": "Content", "default": "<p>ExcelPro Motion Series combines precision engineering with refined design to create cabinet motion that feels effortless, silent, and elegant.</p>" },
+    
+    { "type": "header", "content": "Motion Experience" },
+    { "type": "image_picker", "id": "motion_image", "label": "Side Image" },
+    { "type": "text", "id": "motion_eyebrow", "label": "Eyebrow", "default": "The Experience" },
+    { "type": "richtext", "id": "motion_heading", "label": "Heading", "default": "<p>Every detail,<br><em>engineered</em><br>to disappear</p>" },
+    { "type": "richtext", "id": "motion_content", "label": "Content", "default": "<p>From the first touch to the final close, the Motion Series is engineered to make every interaction feel inevitable.</p>" },
+
+    { "type": "header", "content": "Products Showcase" },
+    { "type": "text", "id": "products_eyebrow", "label": "Eyebrow", "default": "The Collection" },
+    { "type": "richtext", "id": "products_heading", "label": "Heading", "default": "<p>Seven systems.<br><em>One philosophy.</em></p>" },
+    { "type": "richtext", "id": "products_description", "label": "Description", "default": "<p>Each product in the Motion Series is named in Italian.</p>" },
+
+    { "type": "header", "content": "Features" },
+    { "type": "text", "id": "features_eyebrow", "label": "Eyebrow", "default": "Why Motion Series" },
+    { "type": "richtext", "id": "features_heading", "label": "Heading", "default": "<p>Built to a standard<br>you can <em>feel</em></p>" },
+
+    { "type": "header", "content": "CTA" },
+    { "type": "text", "id": "cta_bg_word", "label": "Watermark Word", "default": "Motion" },
+    { "type": "text", "id": "cta_eyebrow", "label": "Eyebrow", "default": "Experience It" },
+    { "type": "richtext", "id": "cta_heading", "label": "Heading", "default": "<p>Upgrade Your<br><em>Cabinet Experience</em></p>" },
+    { "type": "richtext", "id": "cta_subheading", "label": "Subheading", "default": "<p>Discover the complete ExcelPro Motion Series.</p>" },
+    { "type": "text", "id": "cta_btn1_label", "label": "Btn 1 Label", "default": "Explore Motion Series" },
+    { "type": "url", "id": "cta_btn1_url", "label": "Btn 1 URL" },
+    { "type": "text", "id": "cta_btn2_label", "label": "Btn 2 Label", "default": "Contact Us" },
+    { "type": "url", "id": "cta_btn2_url", "label": "Btn 2 URL" }
+  ],
+  "blocks": [
+    {
+      "type": "marquee_item",
+      "name": "Marquee Item",
+      "settings": [ { "type": "text", "id": "text", "label": "Text" } ]
+    },
+    {
+      "type": "benefit",
+      "name": "Motion Benefit",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number" },
+        { "type": "text", "id": "label", "label": "Label" }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "category", "label": "Category" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "tagline", "label": "Tagline" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Core Feature",
+      "settings": [
+        { "type": "html", "id": "svg_icon", "label": "SVG Icon" },
+        { "type": "richtext", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "description", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "ExcelPro Full Page"
+    }
+  ]
+}
+{% endschema %}
