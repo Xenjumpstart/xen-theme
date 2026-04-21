@@ -195,9 +195,23 @@
     },
     "products": {
       "type": "ep-products",
+      "blocks": {
+        "product_CqkRgA": {
+          "type": "product",
+          "settings": {
+            "category": "Kitchen · Smart Door Series",
+            "name": "Velario",
+            "tagline": "Touch-activated smart glass cabinet door lift — the door that reveals.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_CqkRgA"
+      ],
       "settings": {
         "eyebrow": "The Collection",
-        "heading": "<p>Seven systems.<br><em>One philosophy.</em></p>",
+        "heading": "<p>Seven systems.<br/><em>One philosophy.</em></p>",
         "description": "<p>Each product in the Motion Series is named in Italian — a language that has always understood beauty as inseparable from function.</p>"
       }
     },
