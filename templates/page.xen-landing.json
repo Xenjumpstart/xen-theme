@@ -204,10 +204,70 @@
             "tagline": "Touch-activated smart glass cabinet door lift — the door that reveals.",
             "link": ""
           }
+        },
+        "product_nDp69r": {
+          "type": "product",
+          "settings": {
+            "category": "Kitchen · Lift Rack System",
+            "name": "Nasconda",
+            "tagline": "Precision automatic lift rack system — engineered to emerge.",
+            "link": ""
+          }
+        },
+        "product_nm4hhn": {
+          "type": "product",
+          "settings": {
+            "category": "Kitchen · Double Layer Series",
+            "name": "Strato",
+            "tagline": "Dual-motor two-tier automatic cabinet lift — organised layers.",
+            "link": ""
+          }
+        },
+        "product_kCwCnB": {
+          "type": "product",
+          "settings": {
+            "category": "Kitchen · Lift Rack System",
+            "name": "Vaseria",
+            "tagline": "Matte black automatic lift rack — vessel keeper.",
+            "link": ""
+          }
+        },
+        "product_RbMw8L": {
+          "type": "product",
+          "settings": {
+            "category": "Kitchen · Base Cabinet Series",
+            "name": "Podio",
+            "tagline": "Rising platform with integrated power socket — the platform.",
+            "link": ""
+          }
+        },
+        "product_RAHP6P": {
+          "type": "product",
+          "settings": {
+            "category": "Wardrobe · Hanging Rail Series",
+            "name": "Sospeso",
+            "tagline": "Motorised descending cloud wardrobe hanging rail — suspended.",
+            "link": ""
+          }
+        },
+        "product_ywqbj4": {
+          "type": "product",
+          "settings": {
+            "category": "Wardrobe · Mirror Lift Series",
+            "name": "Riflesso",
+            "tagline": "LED-surround automatic rising mirror lift — the reflection.",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "product_CqkRgA"
+        "product_CqkRgA",
+        "product_nDp69r",
+        "product_nm4hhn",
+        "product_kCwCnB",
+        "product_RbMw8L",
+        "product_RAHP6P",
+        "product_ywqbj4"
       ],
       "settings": {
         "eyebrow": "The Collection",
