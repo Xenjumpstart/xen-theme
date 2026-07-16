@@ -1,0 +1,373 @@
+{%- liquid
+  assign heading_text = section.settings.heading
+  assign heading_chars = heading_text | split: ''
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --hero-section-height: {{ section.settings.section_height }}vh;
+    --hero-text-color: {{ section.settings.text_color }};
+    --hero-gradient-color: {{ section.settings.gradient_color }};
+    --hero-gradient-height: {{ section.settings.gradient_height }}%;
+    --hero-gradient-opacity: {{ section.settings.gradient_opacity | divided_by: 100.0 }};
+    --hero-ring-radius: 37vmin;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    height: var(--hero-section-height);
+    position: relative;
+    background-color: #090909;
+  }
+
+  #shopify-section-{{ section.id }} .hero-gradient-overlay {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    height: 100vh;
+    pointer-events: none;
+    background-image: linear-gradient(to top, var(--hero-gradient-color) 0%, transparent var(--hero-gradient-height));
+    opacity: var(--hero-gradient-opacity);
+    z-index: 5;
+  }
+
+  #shopify-section-{{ section.id }} .animated-heading {
+    position: fixed;
+    inset-inline: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    margin: 0;
+    perspective: 5400px;
+    opacity: 1;
+
+    top: 42.2vmin;
+  }
+
+  @media (max-width: 380px) { /* small-phone */
+    #shopify-section-{{ section.id }} .animated-heading { top: 30.8vmin; }
+  }
+  @media (max-width: 480px) and (min-height: 740px) { /* tall-phone */
+    #shopify-section-{{ section.id }} .animated-heading { top: 54.5vmin; }
+  }
+  @media (max-height: 500px) and (orientation: landscape) { /* mobile-landscape */
+    #shopify-section-{{ section.id }} .animated-heading { top: 2.8vmin; }
+  }
+  @media (min-width: 640px) { /* sm */
+     #shopify-section-{{ section.id }} .animated-heading { top: 16.6vmin; }
+  }
+  @media (min-width: 768px) { /* md */
+    #shopify-section-{{ section.id }} .animated-heading { top: 12.6vmin; }
+  }
+  @media (min-width: 1024px) { /* lg */
+     #shopify-section-{{ section.id }} .animated-heading { top: 9.2vmin; }
+  }
+
+
+  #shopify-section-{{ section.id }} .hero-ring-wrapper {
+    width: calc(var(--hero-ring-radius) * 2);
+    height: calc(var(--hero-ring-radius) * 2);
+  }
+
+  #shopify-section-{{ section.id }} .hero-ring {
+    --hero-ring-intro-delay-mobile: 1000ms;
+    --hero-ring-intro-delay-desktop: 1300ms;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+
+  #shopify-section-{{ section.id }} .hero-ring-letter {
+    --letter-delay-mobile: 1000ms;
+    --letter-delay-desktop: 1300ms;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    white-space: pre;
+    font-size: calc(var(--hero-ring-radius) * 0.35);
+    display: inline-block;
+    color: var(--hero-text-color);
+    letter-spacing: -0.08em;
+    line-height: 1.5;
+    padding: 0.2em 0.2em 0.4em 0.02em;
+    opacity: 0;
+    animation: reveal-letter 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--reveal-delay-desktop);
+  }
+  
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .hero-ring-letter {
+      animation-delay: var(--reveal-delay-mobile);
+    }
+  }
+
+  @keyframes reveal-letter {
+    from {
+      opacity: 0;
+      transform: var(--letter-from);
+    }
+    to {
+      opacity: 1;
+      transform: var(--letter-to);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .slideshow-container {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .jsc-slideshow__slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .jsc-slideshow__dots {
+    z-index: 6;
+  }
+
+  /* jsc-slideshow v1 */
+  #shopify-section-{{ section.id }} .jsc-slideshow { position: relative; overflow: hidden; min-height: 320px; height: 100%;}
+  #shopify-section-{{ section.id }} .jsc-slideshow__slide {
+    position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+  #shopify-section-{{ section.id }} .jsc-slideshow__slide[data-active] { opacity: 1; pointer-events: auto; }
+  #shopify-section-{{ section.id }} .jsc-slideshow__dots {
+    position: absolute; bottom: 16px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 8px; z-index: 2;
+  }
+  #shopify-section-{{ section.id }} .jsc-slideshow__dot {
+    width: 10px; height: 10px; border-radius: 50%; border: 0; padding: 0;
+    background: rgba(255,255,255,0.5); cursor: pointer; transition: background 0.2s;
+  }
+  #shopify-section-{{ section.id }} .jsc-slideshow__dot[data-active] { background: #fff; }
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .jsc-slideshow__slide { transition: none; }
+  }
+</style>
+
+<section id="shopify-section-{{ section.id }}">
+  <div class="hero-gradient-overlay" aria-hidden="true"></div>
+
+  {%- if section.settings.show_animated_text -%}
+    <h1 class="animated-heading" aria-label="{{ section.settings.heading | escape }}">
+      <div class="hero-ring-wrapper">
+        <div class="hero-ring">
+          {%- comment -%}
+            The following letter spans are specifically calculated for the 10-letter word "Everywhere".
+            Changing the word without recalculating the transform values will break the circular layout.
+            For simplicity and robustness, the text is hardcoded to ensure the design is preserved.
+            The aria-label makes the correct heading available to screen readers.
+          {%- endcomment -%}
+          <span aria-hidden="true" class="hero-ring-letter" style="--reveal-delay-mobile: 1000ms; --reveal-delay-desktop: 1300ms; --letter-to: translate(-50%, -50%) rotateY(20.277366760658346deg) translateZ(var(--hero-ring-radius)); --letter-from: translate(-50%, -50%) rotateY(6.277366760658346deg) translateZ(var(--hero-ring-radius));">E</span>
+          <span aria-hidden="true" class="hero-ring-letter" style="--reveal-delay-mobile: 1055ms; --reveal-delay-desktop: 1355ms; --letter-to: translate(-50%, -50%) rotateY(29.520001705508385deg) translateZ(var(--hero-ring-radius)); --letter-from: translate(-50%, -50%) rotateY(15.520001705508385deg) translateZ(var(--hero-ring-radius));">v</span>
+          <span aria-hidden="true" class="hero-ring-letter" style="--reveal-delay-mobile: 1110ms; --reveal-delay-desktop: 1410ms; --letter-to: translate(-50%, -50%) rotateY(38.193742385689525deg) translateZ(var(--hero-ring-radius)); --letter-from: translate(-50%, -50%) rotateY(24.193742385689525deg) translateZ(var(--hero-ring-radius));">e</span>
+          <span aria-hidden="true" class="hero-ring-letter" style="letter-spacing: -0.03em; --reveal-delay-mobile: 1165ms; --reveal-delay-desktop: 1465ms; --letter-to: translate(-50%, -50%) rotateY(46.05477697348651deg) translateZ(var(--hero-ring-radius)); --letter-from: translate(-50%, -50%) rotateY(32.05477697348651deg) translateZ(var(--hero-ring-radius));">r</span>
+          <span aria-hidden="true" class="hero-ring-letter" style="letter-spacing: -0.04em; --reveal-delay-mobile: 1220ms; --reveal-delay-desktop: 1520ms; --letter-to: translate(-50%, -50%) rotateY(54.159623388998746deg) translateZ(var(--hero-ring-radius)); --letter-from: translate(-50%, -50%) rotateY(40.159623388998746deg) translateZ(var(--hero-ring-radius));">y</span>
+          <span aria-hidden="true" class="hero-ring-letter" style="--reveal-delay-mobile: 1275ms; --reveal-delay-desktop: 1575ms; --letter-to: translate(-50%, -50%) rotateY(65.1089411278555deg) translateZ(var(--hero-ring-radius)); --letter-from: translate(-50%, -50%) rotateY(51.1089411278555deg) translateZ(var(--hero-ring-radius));">w</span>
+          <span aria-hidden="true" class="hero-ring-letter" style="--reveal-delay-mobile: 1330ms; --reveal-delay-desktop: 1630ms; --letter-to: translate(-50%, -50%) rotateY(76.26143538980828deg) translateZ(var(--hero-ring-radius)); --letter-from: translate(-50%, -50%) rotateY(62.261435389808284deg) translateZ(var(--hero-ring-radius));">h</span>
+          <span aria-hidden="true" class="hero-ring-letter" style="--reveal-delay-mobile: 1385ms; --reveal-delay-desktop: 1685ms; --letter-to: translate(-50%, -50%) rotateY(85.54470563927754deg) translateZ(var(--hero-ring-radius)); --letter-from: translate(-50%, -50%) rotateY(71.54470563927754deg) translateZ(var(--hero-ring-radius));">e</span>
+          <span aria-hidden="true" class="hero-ring-letter" style="--reveal-delay-mobile: 1440ms; --reveal-delay-desktop: 1740ms; --letter-to: translate(-50%, -50%) rotateY(92.91811657164405deg) translateZ(var(--hero-ring-radius)); --letter-from: translate(-50%, -50%) rotateY(78.91811657164405deg) translateZ(var(--hero-ring-radius));">r</span>
+          <span aria-hidden="true" class="hero-ring-letter" style="--reveal-delay-mobile: 1495ms; --reveal-delay-desktop: 1795ms; --letter-to: translate(-50%, -50%) rotateY(100.29152750401055deg) translateZ(var(--hero-ring-radius)); --letter-from: translate(-50%, -50%) rotateY(86.29152750401055deg) translateZ(var(--hero-ring-radius));">e</span>
+        </div>
+      </div>
+    </h1>
+  {%- endif -%}
+
+  <div class="slideshow-container">
+    <div class="jsc-slideshow" data-jsc-slideshow data-autoplay="{{ section.settings.autoplay }}" data-interval="{{ section.settings.autoplay_speed | times: 1000 }}">
+      {%- for block in section.blocks -%}
+        <div class="jsc-slideshow__slide" {{ block.shopify_attributes }}{% if forloop.first %} data-active{% endif %}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '800, 1200, 1600, 2000, 2400' }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+
+      {% if section.blocks.size > 1 %}
+        <div class="jsc-slideshow__dots" role="tablist">
+          {%- for block in section.blocks -%}
+            <button class="jsc-slideshow__dot" type="button" data-idx="{{ forloop.index0 }}" aria-label="Slide {{ forloop.index }}"{% if forloop.first %} data-active{% endif %}></button>
+          {%- endfor -%}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script>
+/* jsc-slideshow v1 */
+(function(){
+  var root = document.getElementById('shopify-section-{{ section.id }}');
+  var box = root && root.querySelector('[data-jsc-slideshow]');
+  if (!box) return;
+  var slides = box.querySelectorAll('.jsc-slideshow__slide');
+  var dots = box.querySelectorAll('.jsc-slideshow__dot');
+  if (slides.length < 2) return;
+  var i = 0, timer = null;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var autoplay = box.getAttribute('data-autoplay') !== 'false' && !reduced;
+  var interval = parseInt(box.getAttribute('data-interval')) || 5000;
+  function show(n){ i = (n + slides.length) % slides.length;
+    slides.forEach(function(s, k){ if (k === i) s.setAttribute('data-active',''); else s.removeAttribute('data-active'); });
+    dots.forEach(function(d, k){ if (k === i) d.setAttribute('data-active',''); else d.removeAttribute('data-active'); });
+  }
+  function play(){ if (!autoplay) return; stop(); timer = setInterval(function(){ show(i + 1); }, interval); }
+  function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+  dots.forEach(function(d){ d.addEventListener('click', function(){ show(parseInt(d.getAttribute('data-idx'))); play(); }); });
+  box.addEventListener('mouseenter', stop);
+  box.addEventListener('mouseleave', play);
+  play();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Hero Animated",
+  "tag": "section",
+  "class": "hero-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Animated Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_animated_text",
+      "label": "Show animated text",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (for accessibility)",
+      "default": "Everywhere"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Slideshow"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Change slides every",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Layout & Styling"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "min": 100,
+      "max": 300,
+      "step": 10,
+      "unit": "vh",
+      "label": "Section scroll height",
+      "default": 150,
+      "info": "Height of the scrollable area. The slideshow itself is fixed to the screen height (100vh) while scrolling inside this section."
+    },
+    {
+      "type": "color",
+      "id": "gradient_color",
+      "label": "Bottom gradient color",
+      "default": "#090909"
+    },
+    {
+      "type": "range",
+      "id": "gradient_height",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Bottom gradient height",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "gradient_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Bottom gradient opacity",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Animated",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
