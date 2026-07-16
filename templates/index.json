@@ -261,30 +261,23 @@
       ],
       "settings": {}
     },
-    "test_js_PTKfxG": {
+    "test_js_Dg6QK7": {
       "type": "test-js",
-      "blocks": {
-        "slide_tfNEHC": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/prod-1-hero-optimized.webp"
-          }
-        }
-      },
-      "block_order": [
-        "slide_tfNEHC"
-      ],
-      "name": "Hero Animated",
+      "name": "3D Hero Text",
       "settings": {
-        "show_animated_text": true,
         "heading": "Everywhere",
         "text_color": "#FFFFFF",
-        "autoplay": true,
-        "autoplay_speed": 5,
-        "section_height": 150,
+        "section_height": 200,
+        "ring_radius": 37,
+        "spread_angle": 90,
+        "start_angle": 0,
+        "spin_duration_s": 40,
+        "reveal_offset_angle": 15,
+        "reveal_delay_start_ms": 500,
+        "reveal_delay_increment_ms": 55,
+        "background_color": "#090909",
         "gradient_color": "#090909",
-        "gradient_height": 35,
-        "gradient_opacity": 0,
+        "gradient_height": 34,
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -297,6 +290,6 @@
     "177056274280a21166",
     "177080422728c07762",
     "1770807710869a2ffc",
-    "test_js_PTKfxG"
+    "test_js_Dg6QK7"
   ]
 }
