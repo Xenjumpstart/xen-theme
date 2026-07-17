@@ -210,6 +210,36 @@
       ],
       "settings": {}
     },
+    "test_js_hero_hDLgYr": {
+      "type": "test-js-hero",
+      "blocks": {
+        "slide_3AtWK4": {
+          "type": "slide",
+          "settings": {
+            "heading": "Everywhere",
+            "background_image": "shopify://shop_images/prod-1-hero-optimized.webp"
+          }
+        }
+      },
+      "block_order": [
+        "slide_3AtWK4"
+      ],
+      "name": "Hero Animated Text",
+      "settings": {
+        "section_height_vh": 100,
+        "ring_radius": 37,
+        "letter_spacing_degrees": 12,
+        "autoplay": true,
+        "autoplay_speed": 7,
+        "animation_start_delay": 1000,
+        "animation_stagger_delay": 55,
+        "text_color": "#FFFFFF",
+        "gradient_color": "#090909",
+        "gradient_height": 35,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "177080422728c07762": {
       "type": "_blocks",
       "settings": {}
@@ -344,6 +374,7 @@
     "17705624606cb6c586",
     "featured_collection",
     "177056274280a21166",
+    "test_js_hero_hDLgYr",
     "177080422728c07762",
     "1770807710869a2ffc",
     "test_js_EpBEJr"
