@@ -264,6 +264,27 @@
     "test_js_EpBEJr": {
       "type": "test-js",
       "blocks": {
+        "grid_item_retJX7": {
+          "type": "grid_item",
+          "settings": {
+            "heading": "Item Heading",
+            "text": "<p>Describe the item in a few words.</p>"
+          }
+        },
+        "grid_item_b9fGrg": {
+          "type": "grid_item",
+          "settings": {
+            "heading": "Item Heading",
+            "text": "<p>Describe the item in a few words.</p>"
+          }
+        },
+        "grid_item_KA3rnA": {
+          "type": "grid_item",
+          "settings": {
+            "heading": "Item Heading",
+            "text": "<p>Describe the item in a few words.</p>"
+          }
+        },
         "grid_item_8qFCGF": {
           "type": "grid_item",
           "settings": {
@@ -290,6 +311,9 @@
         }
       },
       "block_order": [
+        "grid_item_retJX7",
+        "grid_item_b9fGrg",
+        "grid_item_KA3rnA",
         "grid_item_8qFCGF",
         "grid_item_yRrGrm",
         "grid_item_xdgwhe"
