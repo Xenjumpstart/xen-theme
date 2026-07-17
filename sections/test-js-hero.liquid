@@ -1,0 +1,537 @@
+{%- liquid
+  assign heading_text = section.settings.heading | default: "Everywhere"
+  assign letters_array = heading_text | split: ''
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --padding-top: {{ section.settings.padding_top }}px;
+    --padding-bottom: {{ section.settings.padding_bottom }}px;
+    --text-color: {{ section.settings.text_color }};
+    --gradient-color-rgb: {{ section.settings.gradient_color.red }}, {{ section.settings.gradient_color.green }}, {{ section.settings.gradient_color.blue }};
+    --gradient-height: {{ section.settings.gradient_height }}%;
+  }
+
+  #shopify-section-{{ section.id }} .hero-section {
+    position: relative;
+    height: {{ section.settings.section_height_vh }}vh;
+    color: var(--text-color);
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+    background-color: #090909;
+  }
+
+  #shopify-section-{{ section.id }} .jsc-slideshow {
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .hero-background-video,
+  #shopify-section-{{ section.id }} .hero-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  
+  #shopify-section-{{ section.id }} .hero-background-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #090909;
+  }
+
+  #shopify-section-{{ section.id }} .hero-background-placeholder > svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .hero-gradient-overlay {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    height: 100lvh;
+    pointer-events: none;
+    background-image: linear-gradient(to top, rgb(var(--gradient-color-rgb)) 0%, transparent var(--gradient-height));
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .hero-heading-container {
+    position: fixed;
+    inset-inline: 0;
+    top: 42.2vmin;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    margin: 0;
+    --hero-ring-letter-size: calc(var(--hero-ring-radius) * 0.35);
+  }
+
+  @media (max-height: 450px) and (orientation: landscape) {
+    #shopify-section-{{ section.id }} .hero-heading-container { top: 2.8vmin; }
+  }
+  @media (min-width: 640px) {
+    #shopify-section-{{ section.id }} .hero-heading-container { top: 16.6vmin; }
+  }
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} .hero-heading-container { top: 12.6vmin; }
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .hero-heading-container { top: 9.2vmin; }
+  }
+
+  #shopify-section-{{ section.id }} .hero-ring-wrapper {
+    width: calc(var(--hero-ring-radius) * 2);
+    height: calc(var(--hero-ring-radius) * 2);
+  }
+
+  #shopify-section-{{ section.id }} .hero-ring {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .hero-ring-letter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    white-space: pre;
+    font-size: var(--hero-ring-letter-size);
+    display: inline-block;
+    line-height: 1.5;
+    letter-spacing: -0.08em;
+    padding: 0.2em 0.2em 0.4em 0.02em;
+    font-weight: 100;
+    opacity: 0;
+    transform: var(--letter-from);
+    will-change: transform, opacity;
+  }
+
+  #shopify-section-{{ section.id }} .hero-ring[data-revealed] .hero-ring-letter {
+    animation-name: hero-letter-reveal;
+    animation-duration: 1000ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    #shopify-section-{{ section.id }} .hero-ring[data-revealed] .hero-ring-letter {
+      animation-delay: var(--reveal-delay-mobile);
+    }
+    @media (min-width: 768px) {
+      #shopify-section-{{ section.id }} .hero-ring[data-revealed] .hero-ring-letter {
+        animation-delay: var(--reveal-delay-desktop);
+      }
+    }
+  }
+
+  @keyframes hero-letter-reveal {
+    to {
+      opacity: 1;
+      transform: var(--letter-to);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .jsc-slideshow__slide {
+    display: block; /* Override component style to stack content */
+    background: #090909;
+  }
+  #shopify-section-{{ section.id }} .jsc-slideshow__dots {
+      bottom: 40px;
+  }
+  #shopify-section-{{ section.id }} .jsc-slideshow__dot {
+      border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  /* jsc-slideshow v1 */
+  #shopify-section-{{ section.id }} .jsc-slideshow { position: relative; overflow: hidden; min-height: 320px; }
+  #shopify-section-{{ section.id }} .jsc-slideshow__slide {
+    position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+  #shopify-section-{{ section.id }} .jsc-slideshow__slide[data-active] { opacity: 1; pointer-events: auto; }
+  #shopify-section-{{ section.id }} .jsc-slideshow__dots {
+    position: absolute; bottom: 16px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 8px; z-index: 5;
+  }
+  #shopify-section-{{ section.id }} .jsc-slideshow__dot {
+    width: 10px; height: 10px; border-radius: 50%; border: 0; padding: 0;
+    background: rgba(255,255,255,0.5); cursor: pointer; transition: background 0.2s;
+  }
+  #shopify-section-{{ section.id }} .jsc-slideshow__dot[data-active] { background: #fff; }
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .jsc-slideshow__slide { transition: none; }
+  }
+{%- endstyle -%}
+
+<div id="shopify-section-{{ section.id }}" class="hero-section shopify-section">
+  <div class="jsc-slideshow" data-jsc-slideshow data-autoplay="{{ section.settings.autoplay }}" data-interval="{{ section.settings.autoplay_speed | times: 1000 }}">
+    {% for block in section.blocks %}
+      <div class="jsc-slideshow__slide" {% if forloop.first %} data-active{% endif %} {{ block.shopify_attributes }}>
+        
+        {%- if block.settings.background_video_url.type == 'youtube' or block.settings.background_video_url.type == 'vimeo' -%}
+          <div class="hero-background-video" style="padding-bottom: 56.25%;">
+             <iframe src="{{ block.settings.background_video_url.id | video_tag: background: 1, autoplay: 1, loop: 1, mute: 1, modestbranding: 1 | split: 'src="' | last | split: '"' | first }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+          </div>
+        {%-elsif block.settings.background_image != blank -%}
+          {{- block.settings.background_image | image_url: width: 3840 | image_tag: class: 'hero-background-image', loading: 'lazy', widths: '100, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 2400', sizes: '100vw' -}}
+        {%- else -%}
+          <div class="hero-background-placeholder">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+
+        <div class="hero-gradient-overlay"></div>
+
+        <h1
+          aria-label="{{ block.settings.heading | escape }}"
+          class="hero-heading-container"
+          style="perspective: 5400px; --hero-ring-radius: {{ section.settings.ring_radius }}vmin;"
+        >
+          <div class="hero-ring-wrapper">
+            <div
+              class="hero-ring"
+              data-heading="{{ block.settings.heading | default: "Everywhere" | escape }}"
+              style="transform-style: preserve-3d;"
+            >
+              {% comment %} Letters are populated by JS {% endcomment %}
+            </div>
+          </div>
+        </h1>
+
+      </div>
+    {% endfor %}
+
+    {% if section.blocks.size > 1 %}
+      <div class="jsc-slideshow__dots" role="tablist">
+        {% for block in section.blocks %}
+          <button class="jsc-slideshow__dot" type="button" data-idx="{{ forloop.index0 }}" aria-label="Slide {{ forloop.index }}"{% if forloop.first %} data-active{% endif %}></button>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  (function() {
+    const sectionId = 'shopify-section-{{ section.id }}';
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    const letterSpacing = {{ section.settings.letter_spacing_degrees }};
+    const animStartDelayMs = {{ section.settings.animation_start_delay }};
+    const animLetterStaggerMs = {{ section.settings.animation_stagger_delay }};
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const initRing = (ring) => {
+      if (ring.dataset.initialized || reducedMotion) return;
+
+      const heading = ring.dataset.heading;
+      const letters = heading.split('');
+      const radius = getComputedStyle(ring.closest('.hero-heading-container')).getPropertyValue('--hero-ring-radius');
+      
+      ring.innerHTML = '';
+      
+      const angleStep = letterSpacing;
+      const totalAngle = (letters.length - 1) * angleStep;
+      const startAngle = -totalAngle / 2;
+
+      letters.forEach((letter, i) => {
+        const span = document.createElement('span');
+        span.setAttribute('aria-hidden', 'true');
+        span.classList.add('hero-ring-letter');
+        span.textContent = letter === ' ' ? '\u00A0' : letter;
+        
+        const rotateTo = startAngle + i * angleStep;
+        const rotateFrom = rotateTo - 14; 
+        
+        const revealDelay = animStartDelayMs + i * animLetterStaggerMs;
+
+        span.style.setProperty('--letter-to', `translate(-50%, -50%) rotateY(${rotateTo}deg) translateZ(${radius})`);
+        span.style.setProperty('--letter-from', `translate(-50%, -50%) rotateY(${rotateFrom}deg) translateZ(${radius})`);
+        span.style.setProperty('--reveal-delay-desktop', `${revealDelay}ms`);
+        span.style.setProperty('--reveal-delay-mobile', `${revealDelay - 300}ms`);
+        
+        ring.appendChild(span);
+      });
+
+      ring.dataset.initialized = true;
+      ring.dataset.revealed = true;
+    };
+
+    const resetRing = (ring) => {
+      ring.removeAttribute('data-initialized');
+      ring.removeAttribute('data-revealed');
+      ring.innerHTML = '';
+    }
+
+    const slideshow = section.querySelector('[data-jsc-slideshow]');
+    if (slideshow) {
+      const observer = new MutationObserver(mutations => {
+        for (const mutation of mutations) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'data-active') {
+            const slide = mutation.target;
+            const ring = slide.querySelector('.hero-ring');
+            if (ring) {
+              if (slide.hasAttribute('data-active')) {
+                setTimeout(() => initRing(ring), 100);
+              } else {
+                resetRing(ring);
+              }
+            }
+          }
+        }
+      });
+
+      const slides = section.querySelectorAll('.jsc-slideshow__slide');
+      slides.forEach(slide => {
+        observer.observe(slide, { attributes: true });
+        if(slide.hasAttribute('data-active')) {
+          const ring = slide.querySelector('.hero-ring');
+          if (ring) initRing(ring);
+        }
+      });
+    } else {
+      const firstRing = section.querySelector('.hero-ring');
+      if (firstRing) initRing(firstRing);
+    }
+  })();
+
+  /* jsc-slideshow v1 */
+  (function(){
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    var box = root && root.querySelector('[data-jsc-slideshow]');
+    if (!box) return;
+    var slides = box.querySelectorAll('.jsc-slideshow__slide');
+    var dots = box.querySelectorAll('.jsc-slideshow__dot');
+    if (slides.length < 2) {
+      if(dots.length > 0) dots[0].parentElement.style.display = 'none';
+      return;
+    };
+    var i = 0, timer = null;
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var autoplay = box.getAttribute('data-autoplay') !== 'false' && !reduced;
+    var interval = parseInt(box.getAttribute('data-interval')) || 5000;
+    function show(n){ i = (n + slides.length) % slides.length;
+      slides.forEach(function(s, k){ if (k === i) s.setAttribute('data-active',''); else s.removeAttribute('data-active'); });
+      dots.forEach(function(d, k){ if (k === i) d.setAttribute('data-active',''); else d.removeAttribute('data-active'); });
+    }
+    function play(){ if (!autoplay) return; stop(); timer = setInterval(function(){ show(i + 1); }, interval); }
+    function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+    dots.forEach(function(d){ d.addEventListener('click', function(){ show(parseInt(d.getAttribute('data-idx'))); stop(); play(); }); });
+    box.addEventListener('mouseenter', stop);
+    box.addEventListener('mouseleave', play);
+    play();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hero Animated Text",
+  "tag": "section",
+  "class": "hero-section-wrapper",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "id": "section_height_vh",
+      "type": "range",
+      "label": "Section height",
+      "min": 100,
+      "max": 200,
+      "step": 10,
+      "unit": "vh",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Text Animation"
+    },
+    {
+      "id": "ring_radius",
+      "type": "range",
+      "label": "Text ring radius",
+      "min": 20,
+      "max": 50,
+      "step": 1,
+      "unit": "vm",
+      "default": 37
+    },
+    {
+      "id": "letter_spacing_degrees",
+      "type": "range",
+      "label": "Letter spacing",
+      "min": 5,
+      "max": 25,
+      "step": 1,
+      "unit": "deg",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Slideshow"
+    },
+    {
+      "id": "autoplay",
+      "type": "checkbox",
+      "label": "Auto-rotate slides",
+      "default": true
+    },
+    {
+      "id": "autoplay_speed",
+      "max": 10,
+      "min": 3,
+      "step": 1,
+      "type": "range",
+      "unit": "s",
+      "label": "Change slides every",
+      "default": 7
+    },
+    {
+      "type": "header",
+      "content": "Animation timing"
+    },
+    {
+      "id": "animation_start_delay",
+      "type": "range",
+      "min": 0,
+      "max": 2000,
+      "step": 100,
+      "unit": "ms",
+      "label": "Animation start delay",
+      "default": 1000
+    },
+    {
+      "id": "animation_stagger_delay",
+      "type": "range",
+      "min": 10,
+      "max": 150,
+      "step": 5,
+      "unit": "ms",
+      "label": "Letter stagger delay",
+      "default": 55
+    },
+    {
+      "type": "header",
+      "content": "Colors & Styling"
+    },
+    {
+      "id": "text_color",
+      "type": "color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "gradient_color",
+      "type": "color",
+      "label": "Bottom gradient color",
+      "default": "#090909"
+    },
+    {
+      "id": "gradient_height",
+      "type": "range",
+      "label": "Bottom gradient height",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 35
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "id": "heading",
+          "type": "text",
+          "label": "Heading",
+          "default": "Everywhere"
+        },
+        {
+          "type": "header",
+          "content": "Background"
+        },
+        {
+          "id": "background_image",
+          "type": "image_picker",
+          "label": "Background image"
+        },
+        {
+          "id": "background_video_url",
+          "type": "video_url",
+          "label": "Background video",
+          "accept": [
+            "youtube",
+            "vimeo"
+          ],
+          "info": "Autoplaying background video from YouTube or Vimeo. Will be muted."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Animated Text",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Everywhere"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Commerce"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Creative"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
