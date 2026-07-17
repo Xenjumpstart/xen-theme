@@ -231,7 +231,7 @@
         "letter_spacing_degrees": 12,
         "autoplay": true,
         "autoplay_speed": 7,
-        "animation_start_delay": 1000,
+        "animation_start_delay": 0,
         "animation_stagger_delay": 55,
         "text_color": "#FFFFFF",
         "gradient_color": "#090909",
