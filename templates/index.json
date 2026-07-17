@@ -261,27 +261,6 @@
       ],
       "settings": {}
     },
-    "test_js_Dg6QK7": {
-      "type": "test-js",
-      "name": "3D Hero Text",
-      "settings": {
-        "heading": "Everywhere",
-        "featured_heading": "Your AI sales associate",
-        "featured_text": "<p>Enter content here</p>",
-        "featured_button_label": "Get Shopify Inbox",
-        "featured_button_url": "",
-        "featured_link_label": "Explore AI messaging apps",
-        "featured_link_url": "",
-        "background_color": "#090909",
-        "text_color": "#ffffff",
-        "button_bg_color": "#ffffff",
-        "button_text_color": "#090909",
-        "link_color": "#bbbbbb",
-        "link_hover_color": "#ffffff",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "test_js_EpBEJr": {
       "type": "test-js",
       "blocks": {
@@ -343,7 +322,6 @@
     "177056274280a21166",
     "177080422728c07762",
     "1770807710869a2ffc",
-    "test_js_Dg6QK7",
     "test_js_EpBEJr"
   ]
 }
