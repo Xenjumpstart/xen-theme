@@ -91,10 +91,12 @@
       "block_order": [
         "ai_gen_block_4d8461a_LNiEjf"
       ],
+      "disabled": true,
       "settings": {}
     },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "collection": "all",
         "products_to_show": 8,
@@ -208,6 +210,7 @@
       "block_order": [
         "ai_gen_block_7be8a03_LrPBgQ"
       ],
+      "disabled": true,
       "settings": {}
     },
     "test_js_hero_hDLgYr": {
@@ -242,6 +245,7 @@
     },
     "177080422728c07762": {
       "type": "_blocks",
+      "disabled": true,
       "settings": {}
     },
     "1770807710869a2ffc": {
@@ -289,6 +293,7 @@
       "block_order": [
         "ai_gen_block_516e53a_pWbemk"
       ],
+      "disabled": true,
       "settings": {}
     },
     "test_js_EpBEJr": {
