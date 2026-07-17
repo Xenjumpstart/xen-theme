@@ -329,11 +329,11 @@
         "featured_link_label": "Explore AI messaging apps",
         "featured_link_url": "",
         "background_color": "#090909",
-        "text_color": "#FFFFFF",
-        "button_bg_color": "#FFFFFF",
+        "text_color": "#ffffff",
+        "button_bg_color": "#ffffff",
         "button_text_color": "#090909",
-        "link_color": "#BBBBBB",
-        "link_hover_color": "#FFFFFF",
+        "link_color": "#bbbbbb",
+        "link_hover_color": "#ffffff",
         "padding_top": 36,
         "padding_bottom": 36
       }
