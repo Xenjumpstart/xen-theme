@@ -266,20 +266,73 @@
       "name": "3D Hero Text",
       "settings": {
         "heading": "Everywhere",
-        "text_color": "#FFFFFF",
-        "section_height": 200,
-        "ring_radius": 37,
-        "spread_angle": 90,
-        "start_angle": 0,
-        "spin_duration_s": 40,
-        "reveal_offset_angle": 15,
-        "reveal_delay_start_ms": 500,
-        "reveal_delay_increment_ms": 55,
+        "featured_heading": "Your AI sales associate",
+        "featured_text": "<p>Enter content here</p>",
+        "featured_button_label": "Get Shopify Inbox",
+        "featured_button_url": "",
+        "featured_link_label": "Explore AI messaging apps",
+        "featured_link_url": "",
         "background_color": "#090909",
-        "gradient_color": "#090909",
-        "gradient_height": 34,
+        "text_color": "#ffffff",
+        "button_bg_color": "#ffffff",
+        "button_text_color": "#090909",
+        "link_color": "#bbbbbb",
+        "link_hover_color": "#ffffff",
         "padding_top": 0,
         "padding_bottom": 0
+      }
+    },
+    "test_js_EpBEJr": {
+      "type": "test-js",
+      "blocks": {
+        "grid_item_8qFCGF": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/prod-1-hero-optimized.webp",
+            "heading": "Storefront search delivers more results",
+            "text": "<p>Make it easier for customers to find what they're looking for. Search is now more forgiving of typos and returns more relevant results, including blog posts and pages.</p>"
+          }
+        },
+        "grid_item_yRrGrm": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/prod-1-hero-optimized.webp",
+            "heading": "More relevant product recommendations",
+            "text": "<p>The new Recommendations API uses a customer's real-time activities like adding to cart and searching to generate personalized suggestions on product pages.</p>"
+          }
+        },
+        "grid_item_xdgwhe": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/prod-1-hero-optimized.webp",
+            "heading": "Semantic search",
+            "text": "<p>Semantic search goes beyond keywords to better understand customer intent. Now customers can find products using conversational and descriptive terms.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "grid_item_8qFCGF",
+        "grid_item_yRrGrm",
+        "grid_item_xdgwhe"
+      ],
+      "name": "Online Features",
+      "settings": {
+        "heading": "Online",
+        "featured_image": "shopify://shop_images/prod-1-hero-optimized.webp",
+        "featured_heading": "Your AI sales associate",
+        "featured_text": "<p>Enter text here</p>",
+        "featured_button_label": "Get Shopify Inbox",
+        "featured_button_url": "",
+        "featured_link_label": "Explore AI messaging apps",
+        "featured_link_url": "",
+        "background_color": "#090909",
+        "text_color": "#FFFFFF",
+        "button_bg_color": "#FFFFFF",
+        "button_text_color": "#090909",
+        "link_color": "#BBBBBB",
+        "link_hover_color": "#FFFFFF",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
@@ -290,6 +343,7 @@
     "177056274280a21166",
     "177080422728c07762",
     "1770807710869a2ffc",
-    "test_js_Dg6QK7"
+    "test_js_Dg6QK7",
+    "test_js_EpBEJr"
   ]
 }
