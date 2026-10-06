@@ -38,6 +38,18 @@
           "type": "quantity_selector",
           "settings": {}
         },
+        "custlo_cashback_offer_Ar97PY": {
+          "type": "shopify://apps/custlo/blocks/cashback-offer/f81081fd-cd04-43ee-897a-18ef0e5d9b04",
+          "settings": {
+            "workflow_id": ""
+          }
+        },
+        "custlo_custom_from_JtaDp4": {
+          "type": "shopify://apps/custlo/blocks/custom-from/f81081fd-cd04-43ee-897a-18ef0e5d9b04",
+          "settings": {
+            "form_id": ""
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -62,6 +74,8 @@
         "price",
         "variant_picker",
         "quantity_selector",
+        "custlo_cashback_offer_Ar97PY",
+        "custlo_custom_from_JtaDp4",
         "buy_buttons",
         "description",
         "share"
